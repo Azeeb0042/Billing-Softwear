@@ -12,8 +12,8 @@ public class db {
 	     
 	     try {
 	         
-	         Class.forName("com.mysql.jdbc.Driver");
-	         con = DriverManager.getConnection("jdbc:mysql://15.206.69.61:3306/sampledb","azeeb","Mysql@@123");
+	         Class.forName("com.mysql.cj.jdbc.Driver");
+	         con = DriverManager.getConnection("jdbc:mysql://15.206.117.96:3306/sampledb","azeeb","Mysql@@123");
 	         return con;
 	         
 	         

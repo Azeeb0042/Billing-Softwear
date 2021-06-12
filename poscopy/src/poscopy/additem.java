@@ -136,6 +136,12 @@ public class additem extends javax.swing.JPanel {
     	JButton btnNewButton_1 = new JButton("RESET");
     	btnNewButton_1.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			pcode.setText("");
+    			 pname.setText("");
+    			 wieght.setText("");
+    			 qty.setText("");
+    			 rprice.setText("");
+    			 wprice.setText("");
     		}
     	});
     	btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
