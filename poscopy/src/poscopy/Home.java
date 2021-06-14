@@ -67,7 +67,7 @@ public class Home extends javax.swing.JFrame {
         home_bnt_grp.add(jToggleButton3);
         jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         //jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/product.png"))); // NOI18N
-        jToggleButton3.setText("Product");
+        jToggleButton3.setText("Billing");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -232,9 +232,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // pro load
-        //product pro =new product();
-        //jpload.jPanelLoader(panel_load, pro);
+    	 
+    	Billinsec bill = new Billinsec();
+        jpload.jPanelLoader(panel_load, bill);
+      
         
         
         

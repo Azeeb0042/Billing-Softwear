@@ -10,13 +10,16 @@ import javax.print.attribute.standard.MediaName;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,7 +46,7 @@ public class updateitem extends JPanel {
 	
 	
 	JList list;
-	JTextArea textArea_1;
+	JTextField searchbox;
 	
 
 	private DefaultListModel model;
@@ -52,6 +55,7 @@ public class updateitem extends JPanel {
 	private JTextField txtwprice;
 	private JTextField txtrprice;
 	private JTextField txtname;
+	 
 	
 
 	
@@ -95,22 +99,53 @@ public class updateitem extends JPanel {
     	add(lblNewLabel_1_4_1);
     	
       
-    	textArea_1= new JTextArea();
-    	textArea_1.addKeyListener(new KeyAdapter() {
+    	searchbox= new JTextField();
+    	searchbox.addKeyListener(new KeyAdapter() {
+    		
     		@Override
-    		public void keyReleased(KeyEvent e) {
-    			list.setVisible(true);
-    			lister();
+    		public void keyPressed(KeyEvent e) {
+    			if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+        			list.setVisible(true);
+        			lister();
+    			}
     		}
     	});
     	
-    	textArea_1.setBounds(251, 90, 224, 26);
-         add(textArea_1);
+    	searchbox.setBounds(251, 90, 224, 26);
+         add(searchbox);
     	
     	JButton btnNewButton = new JButton("UPDATE");
     	btnNewButton.setBounds(340, 441, 110, 23);
     	btnNewButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			if(!txtname.getText().equals("") & !txtrprice.getText().equals("") & !txtqty.getText().equals("") & !txtwprice.getText().equals("") & !txtweight.getText().equals("") )
+    				
+    			{
+    			 try {  
+    					Statement u = db.mycon().createStatement();
+    					float t=Float.parseFloat(txtrprice.getText());
+    					float t1=Float.parseFloat(txtweight.getText());
+    					float t2=Float.parseFloat(txtqty.getText());
+    					float t3=Float.parseFloat(txtwprice.getText());
+
+    			        u.execute("UPDATE sampledb.product SET rprice="+t+", qty="+t2+",wprice="+t3+",wieght="+t1+" WHERE name LIKE '"+txtname.getText()+"'");  
+    			        
+    			        JOptionPane.showMessageDialog(null, "Record is updated...");  
+    			        u.close();  
+    			       
+    			 }
+    				catch(SQLException e1) {
+    					e1.printStackTrace();
+    					 JOptionPane.showMessageDialog(null, "Record is NOT updated..."); 
+    				}
+    			
+    			 }
+    			else
+				{
+		            JOptionPane.showMessageDialog(null, "Enter all values");
+
+				}
+
     		}
     	});
     	btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -149,21 +184,74 @@ public class updateitem extends JPanel {
        list.setModel(model);
        
        txtweight = new JTextField();
+       txtweight.addKeyListener(new KeyAdapter() {
+       	@Override
+       	public void keyReleased(KeyEvent e) {
+       		char c=e.getKeyChar();
+			if(Character.isLetter(c))
+			{
+				
+				 JOptionPane.showMessageDialog(null, "enter number");
+				 txtweight.setText("");
+				
+				
+			}
+       	}
+       });
        txtweight.setBounds(251, 279, 224, 26);
        add(txtweight);
        txtweight.setColumns(10);
        
        txtqty = new JTextField();
+       txtqty.addKeyListener(new KeyAdapter() {
+       	@Override
+       	public void keyReleased(KeyEvent e) {
+       		char c=e.getKeyChar();
+			if(Character.isLetter(c))
+			{
+				
+				 JOptionPane.showMessageDialog(null, "enter number");
+				 txtqty.setText("");
+				
+			}
+       	}
+       });
        txtqty.setBounds(251, 316, 224, 25);
        add(txtqty);
        txtqty.setColumns(10);
        
        txtwprice = new JTextField();
+       txtwprice.addKeyListener(new KeyAdapter() {
+       	@Override
+       	public void keyReleased(KeyEvent e) {
+       		char c=e.getKeyChar();
+			if(Character.isLetter(c))
+			{
+				
+				 JOptionPane.showMessageDialog(null, "enter number");
+				
+				 txtwprice.setText("");
+			}
+       	}
+       });
        txtwprice.setBounds(251, 361, 224, 26);
        add(txtwprice);
        txtwprice.setColumns(10);
        
        txtrprice = new JTextField();
+       txtrprice.addKeyListener(new KeyAdapter() {
+       	@Override
+       	public void keyReleased(KeyEvent e) {
+       		char c=e.getKeyChar();
+			if(Character.isLetter(c))
+			{
+				
+				 JOptionPane.showMessageDialog(null, "enter number");
+				 txtrprice.setText("");
+				
+			}
+       	}
+       });
        txtrprice.setBounds(251, 404, 224, 25);
        add(txtrprice);
        txtrprice.setColumns(10);
@@ -174,6 +262,7 @@ public class updateitem extends JPanel {
        add(lblNewLabel_1_1_1);
        
        txtname = new JTextField();
+       txtname.setEditable(false);
        txtname.setBounds(251, 242, 224, 26);
        add(txtname);
        txtname.setColumns(10);
@@ -182,7 +271,7 @@ public class updateitem extends JPanel {
 	
 	public void lister(){
 		
-		String m=textArea_1.getText();
+		String m=searchbox.getText();
 			try {
 			Statement s = db.mycon().createStatement();
 			ResultSet r = s.executeQuery("select name from sampledb.product where name like '%"+m+"%'order by name");
@@ -204,9 +293,9 @@ public class updateitem extends JPanel {
 	public void mouseClicked(MouseEvent e) {
 		
 		String s=(String) list.getSelectedValue();
-		textArea_1.setText(s);
+		searchbox.setText(s);
 		//list.setVisible(false);
-		String x =textArea_1.getText();
+		String x =searchbox.getText();
 		{try {
 			Statement m = db.mycon().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			
@@ -233,7 +322,8 @@ public class updateitem extends JPanel {
 		
 		}
 	}
-	});}	
+	});}
+	
 }
 
 
