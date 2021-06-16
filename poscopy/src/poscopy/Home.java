@@ -77,7 +77,7 @@ public class Home extends javax.swing.JFrame {
         home_bnt_grp.add(jToggleButton4);
         jToggleButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         //jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/emp.png"))); // NOI18N
-        jToggleButton4.setText("employee");
+        jToggleButton4.setText("Stock");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
@@ -225,8 +225,8 @@ public class Home extends javax.swing.JFrame {
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // emp load
         
-        //employee emp =new employee();
-        //jpload.jPanelLoader(panel_load, emp);
+    	Stock stck = new Stock();
+        jpload.jPanelLoader(panel_load, stck);
         
         
     }//GEN-LAST:event_jToggleButton4ActionPerformed
@@ -243,8 +243,8 @@ public class Home extends javax.swing.JFrame {
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
         
-       //sale sl = new sale();
-       //jpload.jPanelLoader(panel_load, sl);
+       sales sl = new sales();
+       jpload.jPanelLoader(panel_load, sl);
        
         
         
@@ -261,8 +261,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
        
-        //reports rp = new reports();
-        //jpload.jPanelLoader(panel_load, rp);
+    	
         
     }//GEN-LAST:event_jToggleButton7ActionPerformed
 

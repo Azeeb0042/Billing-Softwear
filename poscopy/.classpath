@@ -7,5 +7,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AZEEB/java/barcode/lib/barcode.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AZEEB/java/barcode/lib/qrgen-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AZEEB/java/barcode/lib/zxing-core-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AZEEB/java/barcode/lib/zxing-j2se-1.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

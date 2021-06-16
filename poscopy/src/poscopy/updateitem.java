@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.barcodelib.barcode.Linear;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -55,6 +56,7 @@ public class updateitem extends JPanel {
 	private JTextField txtwprice;
 	private JTextField txtrprice;
 	private JTextField txtname;
+	private JTextField txtcode;
 	 
 	
 
@@ -79,22 +81,22 @@ public class updateitem extends JPanel {
     	add(lblNewLabel_1_1);
     	
     	JLabel lblNewLabel_1_2 = new JLabel("Weight");
-    	lblNewLabel_1_2.setBounds(101, 278, 110, 26);
+    	lblNewLabel_1_2.setBounds(101, 315, 110, 26);
     	lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_2);
     	
     	JLabel lblNewLabel_1_3 = new JLabel("Quantity");
-    	lblNewLabel_1_3.setBounds(101, 315, 110, 26);
+    	lblNewLabel_1_3.setBounds(101, 366, 110, 26);
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_3);
     	
     	JLabel lblNewLabel_1_4 = new JLabel("Wholesale Price");
-    	lblNewLabel_1_4.setBounds(101, 366, 140, 26);
+    	lblNewLabel_1_4.setBounds(101, 417, 140, 26);
     	lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4);
     	
     	JLabel lblNewLabel_1_4_1 = new JLabel("Rettail Price");
-    	lblNewLabel_1_4_1.setBounds(101, 403, 140, 26);
+    	lblNewLabel_1_4_1.setBounds(101, 469, 140, 26);
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4_1);
     	
@@ -115,7 +117,7 @@ public class updateitem extends JPanel {
          add(searchbox);
     	
     	JButton btnNewButton = new JButton("UPDATE");
-    	btnNewButton.setBounds(340, 441, 110, 23);
+    	btnNewButton.setBounds(344, 538, 110, 23);
     	btnNewButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			if(!txtname.getText().equals("") & !txtrprice.getText().equals("") & !txtqty.getText().equals("") & !txtwprice.getText().equals("") & !txtweight.getText().equals("") )
@@ -152,7 +154,7 @@ public class updateitem extends JPanel {
     	add(btnNewButton);
     	
     	JButton btnNewButton_1 = new JButton("CANCEL");
-    	btnNewButton_1.setBounds(523, 441, 126, 23);
+    	btnNewButton_1.setBounds(521, 538, 126, 23);
     	btnNewButton_1.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     		}
@@ -198,7 +200,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtweight.setBounds(251, 279, 224, 26);
+       txtweight.setBounds(251, 317, 224, 26);
        add(txtweight);
        txtweight.setColumns(10);
        
@@ -216,7 +218,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtqty.setBounds(251, 316, 224, 25);
+       txtqty.setBounds(251, 369, 224, 25);
        add(txtqty);
        txtqty.setColumns(10);
        
@@ -234,7 +236,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtwprice.setBounds(251, 361, 224, 26);
+       txtwprice.setBounds(251, 419, 224, 26);
        add(txtwprice);
        txtwprice.setColumns(10);
        
@@ -252,20 +254,54 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtrprice.setBounds(251, 404, 224, 25);
+       txtrprice.setBounds(251, 472, 224, 25);
        add(txtrprice);
        txtrprice.setColumns(10);
        
        JLabel lblNewLabel_1_1_1 = new JLabel("Product Name");
        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-       lblNewLabel_1_1_1.setBounds(101, 243, 110, 26);
+       lblNewLabel_1_1_1.setBounds(101, 278, 110, 26);
        add(lblNewLabel_1_1_1);
        
        txtname = new JTextField();
        txtname.setEditable(false);
-       txtname.setBounds(251, 242, 224, 26);
+       txtname.setBounds(251, 280, 224, 26);
        add(txtname);
        txtname.setColumns(10);
+       
+       JButton btnNewButton_2 = new JButton("Generate Barcode");
+       btnNewButton_2.addActionListener(new ActionListener() {
+       	public void actionPerformed(ActionEvent e) {
+       		try {
+				Linear barcode = new Linear();
+				barcode.setType(Linear.CODE128B);
+				barcode.setData(txtcode.getText());
+				barcode.setI(11.0f);
+				String fname=txtcode.getText();
+				barcode.renderBarcode("D:\\Barcode\\"+fname+".png");
+				
+				
+			}
+			catch(Exception a) {
+				a.printStackTrace();
+		}
+       		
+       	}
+       });
+       btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+       btnNewButton_2.setBounds(649, 179, 171, 39);
+       add(btnNewButton_2);
+       
+       txtcode = new JTextField();
+       txtcode.setEditable(false);
+       txtcode.setColumns(10);
+       txtcode.setBounds(251, 243, 224, 26);
+       add(txtcode);
+       
+       JLabel lblNewLabel_1_1_1_1 = new JLabel("Product Code");
+       lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+       lblNewLabel_1_1_1_1.setBounds(101, 243, 110, 26);
+       add(lblNewLabel_1_1_1_1);
    
     	}
 	
@@ -301,7 +337,7 @@ public class updateitem extends JPanel {
 			
 			ResultSet t=m.executeQuery("select * from sampledb.product where name like '%"+x+"%' order by rprice LIMIT 1");
 			t.first();
-			
+			txtcode.setText(t.getString("productcode"));
 			 txtrprice.setText(t.getString("rprice"));
 			 txtwprice.setText(t.getString("wprice"));
 			 txtqty.setText(t.getString("qty"));
@@ -323,7 +359,6 @@ public class updateitem extends JPanel {
 		}
 	}
 	});}
-	
 }
 
 

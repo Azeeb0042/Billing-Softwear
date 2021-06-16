@@ -13,6 +13,8 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.barcodelib.barcode.Linear;
+
 import poscopy.db;
 
 import javax.swing.GroupLayout.Alignment;
@@ -188,7 +190,7 @@ public class additem extends javax.swing.JPanel {
         		             JOptionPane.showMessageDialog(null, "Added Item");
         		            
         		            
-        		        } catch (Exception b) {
+        		        } catch (Exception b) { 
         		            System.out.println(b);
         		            JOptionPane.showMessageDialog(null, b);
         		        }
@@ -221,7 +223,15 @@ public class additem extends javax.swing.JPanel {
     		            
     		            Statement s = db.mycon().createStatement();
     		            s.executeUpdate(" INSERT INTO sampledb.product(productcode,name,qty,wieght,rprice,wprice) VALUES ('"+code+"','"+name+"','"+floatqty+"','"+floatwiegh+"','"+floatrpri+"','"+floatwpri+"')");
-    		             JOptionPane.showMessageDialog(null, "Added Item");
+    		            Linear barcode = new Linear();
+    					barcode.setType(Linear.CODE128B);
+    					barcode.setData(pcode.getText());
+    					barcode.setI(11.0f);
+    					String fname=pcode.getText();
+    					barcode.renderBarcode("D:\\Barcode\\"+fname+".png");
+    					
+    		            JOptionPane.showMessageDialog(null, "Added Item");
+    		             
     		            
     		            
     		        } catch (Exception b) {
