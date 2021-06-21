@@ -57,6 +57,8 @@ public class updateitem extends JPanel {
 	private JTextField txtrprice;
 	private JTextField txtname;
 	private JTextField txtcode;
+	private JTextField txtdisc;
+	private JTextField txttax;
 	 
 	
 
@@ -86,19 +88,69 @@ public class updateitem extends JPanel {
     	add(lblNewLabel_1_2);
     	
     	JLabel lblNewLabel_1_3 = new JLabel("Quantity");
-    	lblNewLabel_1_3.setBounds(101, 366, 110, 26);
+    	lblNewLabel_1_3.setBounds(101, 352, 110, 26);
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_3);
     	
     	JLabel lblNewLabel_1_4 = new JLabel("Wholesale Price");
-    	lblNewLabel_1_4.setBounds(101, 417, 140, 26);
+    	lblNewLabel_1_4.setBounds(101, 389, 140, 26);
     	lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4);
     	
     	JLabel lblNewLabel_1_4_1 = new JLabel("Rettail Price");
-    	lblNewLabel_1_4_1.setBounds(101, 469, 140, 26);
+    	lblNewLabel_1_4_1.setBounds(101, 426, 140, 26);
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4_1);
+    	txtdisc = new JTextField();
+    	txtdisc.addKeyListener(new KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+
+           		char c=e.getKeyChar();
+    			if(Character.isLetter(c))
+    			{
+    				
+    				 JOptionPane.showMessageDialog(null, "enter number");
+    				 txttax.setText("");
+    				
+    				
+    			}
+           	
+    		}
+    	});
+    	txtdisc.setBounds(251, 470,  225, 25);
+    	add(txtdisc);
+    	txtdisc.setColumns(10);
+    	
+    	txttax = new JTextField();
+    	txttax.addKeyListener(new KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+           		char c=e.getKeyChar();
+    			if(Character.isLetter(c))
+    			{
+    				
+    				 JOptionPane.showMessageDialog(null, "enter number");
+    				 txttax.setText("");
+    				
+    				
+    			}
+           	
+    		}
+    	});
+    	txttax.setBounds(251, 509, 225, 25);
+    	add(txttax);
+    	txttax.setColumns(10);
+    	
+    	JLabel disclabel = new JLabel("Discount");
+    	disclabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+    	disclabel.setBounds(101, 473, 140, 14);
+    	add(disclabel);
+    	
+    	JLabel taxlabel = new JLabel("Tax");
+    	taxlabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+    	taxlabel.setBounds(101, 512, 110, 14);
+    	add(taxlabel);
     	
       
     	searchbox= new JTextField();
@@ -117,7 +169,7 @@ public class updateitem extends JPanel {
          add(searchbox);
     	
     	JButton btnNewButton = new JButton("UPDATE");
-    	btnNewButton.setBounds(344, 538, 110, 23);
+    	btnNewButton.setBounds(587, 421, 110, 23);
     	btnNewButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			if(!txtname.getText().equals("") & !txtrprice.getText().equals("") & !txtqty.getText().equals("") & !txtwprice.getText().equals("") & !txtweight.getText().equals("") )
@@ -129,8 +181,10 @@ public class updateitem extends JPanel {
     					float t1=Float.parseFloat(txtweight.getText());
     					float t2=Float.parseFloat(txtqty.getText());
     					float t3=Float.parseFloat(txtwprice.getText());
+    					float t4=Float.parseFloat(txtdisc.getText());
+    					float t5=Float.parseFloat(txttax.getText());
 
-    			        u.execute("UPDATE sampledb.product SET rprice="+t+", qty="+t2+",wprice="+t3+",wieght="+t1+" WHERE name LIKE '"+txtname.getText()+"'");  
+    			        u.execute("UPDATE sampledb.product SET rprice="+t+", qty="+t2+",wprice="+t3+",wieght="+t1+",disc="+t4+",tax="+t5+" WHERE name LIKE '"+txtname.getText()+"'");  
     			        
     			        JOptionPane.showMessageDialog(null, "Record is updated...");  
     			        u.close();  
@@ -154,7 +208,7 @@ public class updateitem extends JPanel {
     	add(btnNewButton);
     	
     	JButton btnNewButton_1 = new JButton("CANCEL");
-    	btnNewButton_1.setBounds(521, 538, 126, 23);
+    	btnNewButton_1.setBounds(587, 483, 110, 23);
     	btnNewButton_1.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     		}
@@ -163,6 +217,48 @@ public class updateitem extends JPanel {
     	add(btnNewButton_1);
     	
     	 list = new JList();
+    	 list.addKeyListener(new KeyAdapter() {
+    	 	@Override
+    	 	public void keyPressed(KeyEvent e) {
+    	 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+    	 			
+    	 			String s=(String) list.getSelectedValue();
+    	 			searchbox.setText(s);
+    	 			//list.setVisible(false);
+    	 			String x =searchbox.getText();
+    	 			{try {
+    	 				Statement m = db.mycon().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+    	 				
+    	 				ResultSet t=m.executeQuery("select * from sampledb.product where name like '%"+x+"%' order by rprice LIMIT 1");
+    	 				t.first();
+    	 				txtcode.setText(t.getString("productcode"));
+    	 				 txtrprice.setText(t.getString("rprice"));
+    	 				 txtwprice.setText(t.getString("wprice"));
+    	 				 txtqty.setText(t.getString("qty"));
+    	 				 txtname.setText(t.getString("name"));
+    	 				 txtweight.setText(t.getString("wieght"));
+    	 				 txtdisc.setText(t.getString("disc"));
+    	 				 txttax.setText(t.getString("tax"));
+    	 				//model.removeAllElements();
+    	 				list.setVisible(false);
+    	 				
+    	 				
+    	 			
+    	 			
+    	 			}
+    	 			catch(SQLException d) {
+    	 				d.printStackTrace();
+    	 				
+    	 				
+    	 			}
+    	 			
+    	 			}
+    	 		
+    	 			
+    	 			
+    	 		}
+    	 	}
+    	 });
     	 list.setBorder(new LineBorder(new Color(0, 0, 0)));
     	 list.setVisible(false);
     	
@@ -204,6 +300,7 @@ public class updateitem extends JPanel {
        add(txtweight);
        txtweight.setColumns(10);
        
+       
        txtqty = new JTextField();
        txtqty.addKeyListener(new KeyAdapter() {
        	@Override
@@ -218,7 +315,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtqty.setBounds(251, 369, 224, 25);
+       txtqty.setBounds(250, 354, 224, 25);
        add(txtqty);
        txtqty.setColumns(10);
        
@@ -236,7 +333,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtwprice.setBounds(251, 419, 224, 26);
+       txtwprice.setBounds(250, 390, 224, 26);
        add(txtwprice);
        txtwprice.setColumns(10);
        
@@ -254,7 +351,7 @@ public class updateitem extends JPanel {
 			}
        	}
        });
-       txtrprice.setBounds(251, 472, 224, 25);
+       txtrprice.setBounds(251, 427, 224, 25);
        add(txtrprice);
        txtrprice.setColumns(10);
        
@@ -289,7 +386,7 @@ public class updateitem extends JPanel {
        	}
        });
        btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-       btnNewButton_2.setBounds(649, 179, 171, 39);
+       btnNewButton_2.setBounds(586, 156, 171, 39);
        add(btnNewButton_2);
        
        txtcode = new JTextField();
@@ -302,6 +399,11 @@ public class updateitem extends JPanel {
        lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
        lblNewLabel_1_1_1_1.setBounds(101, 243, 110, 26);
        add(lblNewLabel_1_1_1_1);
+       
+       JLabel lblNewLabel_1 = new JLabel("%");
+       lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+       lblNewLabel_1.setBounds(486, 514, 19, 20);
+       add(lblNewLabel_1);
    
     	}
 	
@@ -343,6 +445,8 @@ public class updateitem extends JPanel {
 			 txtqty.setText(t.getString("qty"));
 			 txtname.setText(t.getString("name"));
 			 txtweight.setText(t.getString("wieght"));
+			 txtdisc.setText(t.getString("disc"));
+			 txttax.setText(t.getString("tax"));
 			//model.removeAllElements();
 			list.setVisible(false);
 			

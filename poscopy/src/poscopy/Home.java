@@ -1,4 +1,7 @@
 package poscopy;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 
@@ -30,13 +33,6 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton6 = new javax.swing.JToggleButton();
-        jToggleButton7 = new javax.swing.JToggleButton();
         panel_load = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -44,124 +40,139 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        home_bnt_grp.add(jToggleButton1);
-        jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/customer.png"))); // NOI18N
-        jToggleButton1.setText("Add Item");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton2);
-        jToggleButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/supplier.png"))); // NOI18N
-        jToggleButton2.setText("Update Item");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton3);
-        jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/product.png"))); // NOI18N
-        jToggleButton3.setText("Billing");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton4);
-        jToggleButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/emp.png"))); // NOI18N
-        jToggleButton4.setText("Stock");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton5);
-        jToggleButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/sales_menu.png"))); // NOI18N
-        jToggleButton5.setText("Sales");
-        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton5ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton6);
-        jToggleButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/invo.png"))); // NOI18N
-        jToggleButton6.setText("Invoice");
-        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton6ActionPerformed(evt);
-            }
-        });
-
-        home_bnt_grp.add(jToggleButton7);
-        jToggleButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        //jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/reports.png"))); // NOI18N
-        jToggleButton7.setText("Reports");
-        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton7ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 192, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jToggleButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton7)
-                .addContainerGap(206, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 611, Short.MAX_VALUE)
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         panel_load.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jToggleButton1 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton1);
+                jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/customer.png"))); // NOI18N
+                jToggleButton1.setText("Add Item");
+                jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton1ActionPerformed(evt);
+                    }
+                });
+        jToggleButton2 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton2);
+                jToggleButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/supplier.png"))); // NOI18N
+                jToggleButton2.setText("Update Item");
+                jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton2ActionPerformed(evt);
+                    }
+                });
+        jToggleButton4 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton4);
+                jToggleButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/emp.png"))); // NOI18N
+                jToggleButton4.setText("Stock");
+                jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton4ActionPerformed(evt);
+                    }
+                });
+        jToggleButton3 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton3);
+                jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/product.png"))); // NOI18N
+                jToggleButton3.setText("Billing");
+                jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton3ActionPerformed(evt);
+                    }
+                });
+        jToggleButton5 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton5);
+                jToggleButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/sales_menu.png"))); // NOI18N
+                jToggleButton5.setText("Edit Bill");
+                jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton5ActionPerformed(evt);
+                    }
+                });
+        jToggleButton6 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton6);
+                jToggleButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/invo.png"))); // NOI18N
+                jToggleButton6.setText("Invoice");
+                jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton6ActionPerformed(evt);
+                    }
+                });
+        jToggleButton7 = new javax.swing.JToggleButton();
+        
+                home_bnt_grp.add(jToggleButton7);
+                jToggleButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                //jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/reports.png"))); // NOI18N
+                jToggleButton7.setText("Reports");
+                jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jToggleButton7ActionPerformed(evt);
+                    }
+                });
 
         javax.swing.GroupLayout panel_loadLayout = new javax.swing.GroupLayout(panel_load);
-        panel_load.setLayout(panel_loadLayout);
         panel_loadLayout.setHorizontalGroup(
-            panel_loadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 958, Short.MAX_VALUE)
+        	panel_loadLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panel_loadLayout.createSequentialGroup()
+        			.addGroup(panel_loadLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panel_loadLayout.createSequentialGroup()
+        					.addGap(127)
+        					.addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(panel_loadLayout.createSequentialGroup()
+        					.addGap(117)
+        					.addGroup(panel_loadLayout.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(jToggleButton7, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jToggleButton3, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(78)
+        			.addGroup(panel_loadLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(panel_loadLayout.createSequentialGroup()
+        					.addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+        					.addGap(65)
+        					.addComponent(jToggleButton4, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(panel_loadLayout.createSequentialGroup()
+        					.addComponent(jToggleButton5, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+        					.addGap(73)
+        					.addComponent(jToggleButton6, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(366, Short.MAX_VALUE))
         );
         panel_loadLayout.setVerticalGroup(
-            panel_loadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        	panel_loadLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(panel_loadLayout.createSequentialGroup()
+        			.addGap(55)
+        			.addGroup(panel_loadLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jToggleButton1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jToggleButton4, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+        			.addGap(79)
+        			.addGroup(panel_loadLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jToggleButton3, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jToggleButton5, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jToggleButton6, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+        			.addGap(79)
+        			.addComponent(jToggleButton7, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(221, Short.MAX_VALUE))
         );
+        panel_load.setLayout(panel_loadLayout);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -177,29 +188,29 @@ public class Home extends javax.swing.JFrame {
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel_load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, 1336, Short.MAX_VALUE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)))
+        			.addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+        			.addContainerGap(20, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -242,19 +253,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        
-       sales sl = new sales();
-       jpload.jPanelLoader(panel_load, sl);
-       
+    	Editbill kl = new Editbill();
+        jpload.jPanelLoader(panel_load, kl); 
+      
         
         
     }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
-       
         //Invoice inv = new Invoice();
         //jpload.jPanelLoader(panel_load, inv);
-        
+    	 sales sl = new sales();
+         jpload.jPanelLoader(panel_load, sl);
+         
         
         
     }//GEN-LAST:event_jToggleButton6ActionPerformed

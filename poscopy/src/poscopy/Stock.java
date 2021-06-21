@@ -83,7 +83,7 @@ public class Stock extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Statement s = db.mycon().createStatement();
-					ResultSet r = s.executeQuery("select * from sampledb.product");
+					ResultSet r = s.executeQuery("select * from sampledb.product ");
 					
 		           while(r.next()) {
 		        	   String ProductCode=r.getString("productcode");

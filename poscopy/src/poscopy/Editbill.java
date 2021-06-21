@@ -42,7 +42,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class Billinsec extends JPanel {
+public class Editbill extends JPanel {
 	
 	
 	
@@ -66,10 +66,10 @@ public class Billinsec extends JPanel {
 	private JTextField txtcustomer;
 	private JTextField txtpaid;
 	private JTextField txtbalance;
+	private JTextField bill_id;
+	private JTextField txtnetamnt;
 	private JTextField txtmdisc;
-	private JTextField textField_1;
-	private JTextField netamnt;
-	public int getbillno()
+	/*public int getbillno()
 	{
 		int bill=0;
 		try{
@@ -84,10 +84,9 @@ public class Billinsec extends JPanel {
 		}
 		bill=bill+1;
 		return bill;
-		}
-	public Billinsec() {
-		String bills=String.valueOf(getbillno());		
-		
+		}*/
+	
+	public Editbill() {
     	setLayout(null);
     	 
     	JPanel panel = new JPanel();
@@ -95,28 +94,99 @@ public class Billinsec extends JPanel {
     	add(panel);
     	panel.setLayout(null);
     	
-    	JLabel lblNewLabel = new JLabel("INIT BILL");
+    	JLabel lblNewLabel = new JLabel("EDIT BILL");
     	lblNewLabel.setBounds(207, 11, 294, 35);
     	lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
     	panel.add(lblNewLabel);
     	
+    	txtbillid = new JTextField();
+    	txtbillid.addKeyListener(new KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+    			char c=e.getKeyChar();
+    			if(Character.isLetter(c))
+    			{ JOptionPane.showMessageDialog(null, "enter number");
+    			txtbillid.setText("");
+    				
+    			}}
+    	});
+    	txtbillid.setBounds(10, 11, 86, 26);
+    	panel.add(txtbillid);
+    	
+    	JButton search_bill = new JButton("Search Bill");
+    	search_bill.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			if(!txtbillid.getText().equals("")) {
+    			try {
+    				String l=txtbillid.getText();
+           			float v=Float.parseFloat(l);
+    					Statement s = db.mycon().createStatement();
+    					ResultSet r = s.executeQuery("select * from sampledb.sales where billid='"+v+"'");
+    					DefaultTableModel model=(DefaultTableModel)table.getModel();
+    					
+    		           while(r.next()) {
+
+    		        	   String BillId=r.getString("billid");
+    		        	   String Itemno=r.getString("slno");
+    		        	   String Productname=r.getString("item");
+    		        	   String rprice=r.getString("price");
+    		        	   String Discount=r.getString("disc");
+    		        	   String Tax=r.getString("tax");
+    		        	   String Netrate=r.getString("netrate");
+    		        	   String Qty=r.getString("qty");
+    		        	   String Amount=r.getString("amount");
+
+    		        	   	String Object[]= {BillId,Itemno,Productname,rprice,Discount,Tax,Netrate,Qty,Amount};
+    		        	   	
+    		        	   	model.addRow(Object);}
+    		           
+    		           
+    		           bill_id.setText(txtbillid.getText());
+    		           		txtbillid.setText("");
+    		           		ResultSet r5 = s.executeQuery("select * from sampledb.biller where billid='"+v+"'");
+    		           		while(r5.next()) {
+    		           		txtpaid.setText(r5.getString("paid"));
+    		           		txtnetamnt.setText(r5.getString("netrate"));
+    		           		txtmdisc.setText(r5.getString("disc"));
+    		           		txttotal.setText(r5.getString("total"));
+    		           		txtbalance.setText(r5.getString("balance"));
+    		           		}
+    				}
+    				catch(SQLException l) {
+    					l.printStackTrace();
+    					
+    				}	
+    			}else {
+    					JOptionPane.showMessageDialog(null, "enter a number");
+    					
+    				}
+    		}
+    	});
+    	search_bill.setBounds(106, 13, 89, 23);
+    	panel.add(search_bill);
+    	
+    	 
+    	 
+    	
+    	
     	JLabel lblNewLabel_1_1 = new JLabel("Product Search");
-    	lblNewLabel_1_1.setBounds(23, 159, 128, 26);
+    	lblNewLabel_1_1.setBounds(10, 87, 128, 26);
     	lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_1);
     	
     	JLabel lblNewLabel_1_3 = new JLabel("Qty");
-    	lblNewLabel_1_3.setBounds(507, 157, 34, 26);
+    	lblNewLabel_1_3.setBounds(87, 124, 34, 26);
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_3);
     	
     	JLabel lblNewLabel_1_4_1 = new JLabel("R Price");
-    	lblNewLabel_1_4_1.setBounds(75, 196, 60, 26);
+    	lblNewLabel_1_4_1.setBounds(512, 124, 60, 26);
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4_1);
     	
       
     	txtpname= new JTextField();
+    	txtpname.setBounds(132, 89, 147, 26);
     	txtpname.addKeyListener(new KeyAdapter() {
     	    @Override
     		public void keyPressed(KeyEvent e) {
@@ -128,11 +198,10 @@ public class Billinsec extends JPanel {
     			}
     		}
     	});
-    	
-    	txtpname.setBounds(145, 161, 147, 26);
          add(txtpname);
     	
     	 list = new JList();
+    	 list.setBounds(282, 93, 154, 83);
     	 list.addMouseListener(new MouseAdapter() {
     	 	@Override
     	 	public void mouseClicked(MouseEvent e) {
@@ -145,7 +214,6 @@ public class Billinsec extends JPanel {
     				t.first();
     			    txtrprice.setText(t.getString("rprice"));
     			    txtdisc.setText(t.getString("disc"));
-    			    txttax.setText(t.getString("tax"));
     				list.setVisible(false);
     				}
     			    catch(SQLException d) {
@@ -198,8 +266,6 @@ public class Billinsec extends JPanel {
     	 		
     	 	}
     	 });
-    	
-    	 list.setBounds(295, 165, 154, 83);
     	 add(list);
     	 
     	 
@@ -207,12 +273,13 @@ public class Billinsec extends JPanel {
        list.setModel(model);
        
        txtamount = new JTextField();
-       txtamount.setVisible(false);
        txtamount.setBounds(1010, 198, 110, 26);
+       txtamount.setVisible(false);
        add(txtamount);
        txtamount.setColumns(10);
        
        txtqtye = new JTextField();
+       txtqtye.setBounds(131, 127, 86, 25);
        txtqtye.addKeyListener(new KeyAdapter() {
        	@Override
        	public void keyPressed(KeyEvent e) {
@@ -239,17 +306,17 @@ public class Billinsec extends JPanel {
 		
        	}
        });
-       txtqtye.setBounds(551, 160, 86, 25);
        add(txtqtye);
        txtqtye.setColumns(10);
        
        txtrprice = new JTextField();
+       txtrprice.setBounds(582, 127, 86, 25);
        txtrprice.setEditable(false);
-       txtrprice.setBounds(145, 199, 86, 25);
        add(txtrprice);
        txtrprice.setColumns(10);
        
        JButton btnNewButton = new JButton("Add");
+       btnNewButton.setBounds(132, 163, 89, 23);
        btnNewButton.addKeyListener(new KeyAdapter() {
        	@Override
        	public void keyPressed(KeyEvent e) {
@@ -267,11 +334,10 @@ public class Billinsec extends JPanel {
        		keyfunction();
        	}
        });
-       btnNewButton.setBounds(667, 159, 89, 23);
        add(btnNewButton);
        
        JScrollPane scrollPane = new JScrollPane();
-       scrollPane.setBounds(10, 272, 693, 157);
+       scrollPane.setBounds(10, 214, 693, 157);
        add(scrollPane);
        
        table = new JTable();
@@ -304,18 +370,18 @@ public class Billinsec extends JPanel {
 
 
        txttotal = new JTextField();
-       txttotal.setEditable(false);
-       txttotal.setBounds(12, 474, 117, 26);
+       txttotal.setBounds(10, 479, 117, 26);
        add(txttotal);
        txttotal.setColumns(10);
        
        
        JLabel ttllabel = new JLabel("Total");
+       ttllabel.setBounds(45, 445, 60, 23);
        ttllabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-       ttllabel.setBounds(30, 440, 60, 23);
        add(ttllabel);
        
        JButton GENBTN = new JButton("Generate Bill");
+       GENBTN.setBounds(467, 557, 147, 34);
        
        GENBTN.addActionListener(new ActionListener() {
        	public void actionPerformed(ActionEvent e) {
@@ -323,10 +389,34 @@ public class Billinsec extends JPanel {
        		try {
        			DefaultTableModel model=(DefaultTableModel)table.getModel();
        			String a11,b11,c11,d11,f11,g11,h11,i11,j11;
-       			Statement s = db.mycon().createStatement();
+       			Statement n = db.mycon().createStatement();
+				String l=bill_id.getText();
+       			float v=Float.parseFloat(l);
+       			try {
+           			Statement s = db.mycon().createStatement();
+    					ResultSet r1 = s.executeQuery("select * from sampledb.sales where billid='"+v+"'");
+
+    					
+    		           while(r1.next()) {
+    		        	   String Productname=r1.getString("item");
+    		        	   String Qty=r1.getString("qty");
+    		        	   float q=Float.parseFloat(Qty);
+    		        	  s.execute("update sampledb.product  SET qty=qty+("+q+") where name like '"+Productname+"' " );
+    		           }
+    		           
+   				}
+   				catch(SQLException f) {
+   	    			
+   	    			f.printStackTrace();
+   	    		}
+       			n.execute("delete from sampledb.sales where billid='"+v+"'");
+       			n.execute("delete from sampledb.biller where billid='"+v+"'");
+       			
+       				
+       			
        			for(int i=0;i<model.getRowCount();i++)
        				
-       			{	
+       			{  	   
        				a11=model.getValueAt(i, 0).toString();
        				b11=model.getValueAt(i, 1).toString();
        				c11=model.getValueAt(i, 2).toString();
@@ -338,40 +428,38 @@ public class Billinsec extends JPanel {
        				j11=model.getValueAt(i, 8).toString();
        				
        				float g1=Float.parseFloat(i11); 
-       				s.executeUpdate("INSERT INTO sampledb.sales (billid,item,amount,slno,qty,datetime,price,disc,tax,netrate)VALUES ('"+a11+"','"+c11+"','"+j11+"','"+b11+"','"+i11+"',(CURRENT_TIMESTAMP),'"+d11+"','"+f11+"','"+g11+"','"+h11+"')");
-       				s.executeUpdate("UPDATE sampledb.product SET qty=qty -("+g1+")WHERE  name like '"+c11+"'");
-       				
-       			    	          
-       	       	
-       				
-       				
+       				n.executeUpdate("INSERT INTO sampledb.sales (billid,item,amount,slno,qty,datetime,price,disc,tax,netrate)VALUES ('"+a11+"','"+c11+"','"+j11+"','"+b11+"','"+i11+"',(CURRENT_TIMESTAMP),'"+d11+"','"+f11+"','"+g11+"','"+h11+"')");
+       				n.executeUpdate("UPDATE sampledb.product SET qty=qty -("+g1+")WHERE  name like '"+c11+"'");
+       			
        			}
-       		  String billid1,custom,tota,bala,disc,paid,net;
-   			  custom=txtcustomer.getText();
-   	       	  billid1=txtbillid.getText();
-   	          tota=txttotal.getText();
-   	          bala=txtbalance.getText();
-   	          disc=txtmdisc.getText();
-   	          paid=txtpaid.getText();
-        	  net=netamnt.getText();
-   	          
-        	  s.executeUpdate("INSERT INTO sampledb.biller (billid,datetime,customer,total,balance,disc,paid,netrate)VALUES ('"+billid1+"',(CURRENT_TIMESTAMP),'"+custom+"','"+tota+"','"+bala+"','"+disc+"','"+paid+"','"+net+"')");
-
-       		  JOptionPane.showMessageDialog(null, "Bill created");
+       			Statement k = db.mycon().createStatement();
+       		 String billid1,custom,tota,bala,disc,paid,net;
+  			  custom=txtcustomer.getText();
+  	       	  billid1=bill_id.getText();
+  	          tota=txttotal.getText();
+  	          bala=txtbalance.getText();
+  	          disc=txtmdisc.getText();
+  	          paid=txtpaid.getText();
+       	      net=txtnetamnt.getText();
+  	          
+       	  k.executeUpdate("INSERT INTO sampledb.biller (billid,datetime,customer,total,balance,disc,paid,netrate)VALUES ('"+billid1+"',(CURRENT_TIMESTAMP),'"+custom+"','"+tota+"','"+bala+"','"+disc+"','"+paid+"','"+net+"')");
+       			
+       			
+       			JOptionPane.showMessageDialog(null, "Bill created");
        		      //txtbillid.setText("");
-       		  GENBTN.setEnabled(false);
+       			GENBTN.setEnabled(false);
        		 
        		}
        		catch(SQLException f) {
     			
     			f.printStackTrace();
-    		}	}
+    		}}
        });
        GENBTN.setFont(new Font("Tahoma", Font.PLAIN, 18));
-       GENBTN.setBounds(490, 525, 147, 34);
        add(GENBTN);
        
        JButton dltbtn = new JButton("DELETE");
+       dltbtn.setBounds(732, 251, 89, 34);
        dltbtn.addActionListener(new ActionListener() {
        	public void actionPerformed(ActionEvent e) {
        	     DefaultTableModel model=(DefaultTableModel)table.getModel();
@@ -386,70 +474,58 @@ public class Billinsec extends JPanel {
       			}
                String tot=String.valueOf(total);
       			txttotal.setText(tot);
-      		    netamnt.setText(tot);
-                txtpaid.setText(netamnt.getText());
+      			txtnetamnt.setText(tot);	
+       			txtpaid.setText(txtnetamnt.getText());	
               
        	}
        });
        dltbtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-       dltbtn.setBounds(732, 251, 89, 34);
        add(dltbtn);
        
-       txtbillid = new JTextField();
-       txtbillid.setEditable(false);
-       txtbillid.setBounds(1044, 11, 86, 26);
-       add(txtbillid);
-       txtbillid.setText(bills);
-       txtbillid.setColumns(10);
-       
        txtdisc = new JTextField();
-      
-       
-       
-       txtdisc.setBounds(553, 196, 84, 26);
+       txtdisc.setBounds(584, 87, 84, 26);
        add(txtdisc);
        txtdisc.setColumns(10);
        
        JLabel cstmelabel = new JLabel("Discount");
+       cstmelabel.setBounds(504, 87, 70, 26);
        cstmelabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-       cstmelabel.setBounds(471, 194, 70, 26);
        add(cstmelabel);
        
        txttax = new JTextField();
-       txttax.setBounds(145, 235, 86, 26);
+       txttax.setBounds(582, 163, 86, 26);
        add(txttax);
        txttax.setColumns(10);
        
        JLabel lblNewLabel_1 = new JLabel("Tax");
+       lblNewLabel_1.setBounds(522, 161, 49, 20);
        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-       lblNewLabel_1.setBounds(85, 233, 49, 20);
        add(lblNewLabel_1);
        
        txtcustomer = new JTextField();
-       txtcustomer.setBounds(883, 196, 117, 26);
+       txtcustomer.setBounds(1003, 87, 117, 26);
        add(txtcustomer);
        txtcustomer.setColumns(10);
        
        JLabel lblNewLabel_2 = new JLabel("Customer");
+       lblNewLabel_2.setBounds(907, 87, 86, 26);
        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-       lblNewLabel_2.setBounds(787, 196, 86, 26);
        add(lblNewLabel_2);
        
        txtpaid = new JTextField();
-       txtpaid.addMouseListener(new MouseAdapter() {
-       	@Override
-       	public void mouseClicked(MouseEvent e) {
-       		txtpaid.setText("");
-       	}
-       });
+       txtpaid.setBounds(384, 479, 110, 26);
        txtpaid.addKeyListener(new KeyAdapter() {
-       
+       	@Override
+       	public void keyPressed(KeyEvent e) {
+       		
+       	}
        	@Override
        	public void keyReleased(KeyEvent e) {
+
        		if(!txtpaid.getText().equals("")) {
        		
 
-     	   String h=netamnt.getText();
+     	   String h=txtnetamnt.getText();
      	   float h1=Float.parseFloat(h);
      	   String o=txtpaid.getText();
      	   float o1=Float.parseFloat(o);
@@ -462,37 +538,52 @@ public class Billinsec extends JPanel {
             		
             	
        		
-       		}}
-       	@Override
-       	public void keyTyped(KeyEvent e) {
-       		
+       		}
        	}
        });
-       txtpaid.setBounds(386, 474, 110, 26);
        add(txtpaid);
        txtpaid.setColumns(10);
        
        txtbalance = new JTextField();
-       txtbalance.setEditable(false);
-       txtbalance.setBounds(506, 474, 110, 26);
+       txtbalance.setBounds(504, 479, 110, 26);
        add(txtbalance);
        txtbalance.setColumns(10);
        
        JLabel lblNewLabel_3 = new JLabel("Paid");
+       lblNewLabel_3.setBounds(419, 447, 49, 22);
        lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-       lblNewLabel_3.setBounds(421, 440, 49, 22);
        add(lblNewLabel_3);
        
        JLabel lblNewLabel_4 = new JLabel("Balance");
+       lblNewLabel_4.setBounds(528, 445, 71, 23);
        lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-       lblNewLabel_4.setBounds(521, 440, 71, 23);
        add(lblNewLabel_4);
        
-       txtmdisc = new JTextField();
+       bill_id = new JTextField();
+       bill_id.setBounds(963, 28, 84, 26);
+        bill_id.addKeyListener(new KeyAdapter() {
+       	
+    	   @Override
+       	 public void keyPressed(KeyEvent e) {} 
+       });
+       add(bill_id);
+       bill_id.setColumns(10);
        
+       txtnetamnt = new JTextField();
+       txtnetamnt.setColumns(10);
+       txtnetamnt.setBounds(259, 479, 117, 26);
+       add(txtnetamnt);
+       
+       JLabel lblNetAmountTopay = new JLabel("Net Amount Topay");
+       lblNetAmountTopay.setFont(new Font("Tahoma", Font.PLAIN, 14));
+       lblNetAmountTopay.setBounds(259, 442, 117, 26);
+       add(lblNetAmountTopay);
+       
+       txtmdisc = new JTextField();
        txtmdisc.addKeyListener(new KeyAdapter() {
-              	@Override
+       	@Override
        	public void keyReleased(KeyEvent e) {
+
        		if(!txtmdisc.getText().equals("")) {
        		  String h=txttotal.getText();
        	   float h1=Float.parseFloat(h);
@@ -500,8 +591,8 @@ public class Billinsec extends JPanel {
        	   float o1=Float.parseFloat(o);
        	   float j=h1-o1;
        	   String q=String.valueOf(j);
-       	   netamnt.setText(q);
-       	   txtpaid.setText(netamnt.getText());
+       	   txtnetamnt.setText(q);
+       	   txtpaid.setText(txtnetamnt.getText());
        		}
 
         	 
@@ -509,64 +600,17 @@ public class Billinsec extends JPanel {
         		
         		
         	  
+       	
        	}
        });
-       txtmdisc.setBounds(139, 474, 110, 26);
-       add(txtmdisc);
        txtmdisc.setColumns(10);
+       txtmdisc.setBounds(132, 482, 117, 26);
+       add(txtmdisc);
        
-       JLabel lblNewLabel_5 = new JLabel("Discount");
-       lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 16));
-       lblNewLabel_5.setBounds(150, 440, 86, 26);
-       add(lblNewLabel_5);
-       
-       textField_1 = new JTextField();
-       textField_1.addKeyListener(new KeyAdapter() {
-       	@Override
-       	public void keyPressed(KeyEvent e) {
-
-	 		
-			
-			String x =textField_1.getText();
-			{try {
-				Statement m = db.mycon().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
-				ResultSet t=m.executeQuery("select * from sampledb.product where productcode= '"+x+"' ");
-				t.first();
-			    txtrprice.setText(t.getString("rprice"));
-			    txtdisc.setText(t.getString("disc"));
-			    txttax.setText(t.getString("tax"));
-			    txtpname.setText(t.getString("name"));
-				
-				}
-			    catch(SQLException d) {
-				d.printStackTrace();
-			    }
-			
-			}
-	 	
-       		
-       		
-       	}
-       });
-       textField_1.setBounds(145, 106, 147, 26);
-       add(textField_1);
-       textField_1.setColumns(10);
-       
-       JLabel lblNewLabel_6 = new JLabel("Barcode Search");
-       lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 14));
-       lblNewLabel_6.setBounds(23, 106, 112, 26);
-       add(lblNewLabel_6);
-       
-       netamnt = new JTextField();
-       netamnt.setEditable(false);
-       netamnt.setBounds(259, 474, 117, 26);
-       add(netamnt);
-       netamnt.setColumns(10);
-       
-       JLabel lblNewLabel_5_1 = new JLabel("Net Amount to pay");
-       lblNewLabel_5_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-       lblNewLabel_5_1.setBounds(257, 440, 154, 26);
-       add(lblNewLabel_5_1);
+       JLabel lblDiscount = new JLabel("Discount");
+       lblDiscount.setFont(new Font("Tahoma", Font.PLAIN, 16));
+       lblDiscount.setBounds(146, 445, 95, 26);
+       add(lblDiscount);
        
       
     	}
@@ -626,11 +670,10 @@ public class Billinsec extends JPanel {
            			txtdisc.setText(w);
            			DefaultTableModel model=new DefaultTableModel();
            			model=(DefaultTableModel)table.getModel();
-           			
            			model.addRow(new Object[] {
            					
            					
-           					txtbillid.getText(),
+           					bill_id.getText(),
            					slno,
            				txtpname.getText(),
            				txtrprice.getText(),
@@ -649,19 +692,36 @@ public class Billinsec extends JPanel {
            			txtamount.setText("");
            			txtdisc.setText("");
            			txttax.setText("");
-           			textField_1.setText("");
-
+           			txtnetamnt.setText("");
+           			txtpaid.setText("");
            			float total=0;
            			for(int i=0;i<table.getRowCount();i++) {
            				total=total+Float.parseFloat(table.getValueAt(i, 8).toString());
          		
            			}
-           			
-                   
+
            			String tot=String.valueOf(total);
            			txttotal.setText(tot);	
-           		    netamnt.setText(tot);
-           		    txtpaid.setText(netamnt.getText());
+
+
+               	  
+               	/*	 
+               	   float h1=Float.parseFloat(tot);
+               	   String p=txtmdisc.getText();
+               	   float o1=Float.parseFloat(o);
+               	   float j=h1-o1;
+               	   String f=String.valueOf(j);
+               	   txtnetamnt.setText(f);
+               	   txtpaid.setText(txtnetamnt.getText());
+               		
+*/
+                	 
+                	   
+                		
+                		
+                	  
+               	
+               	
            		}
            		else {
            			JOptionPane.showMessageDialog(null, "No stock");

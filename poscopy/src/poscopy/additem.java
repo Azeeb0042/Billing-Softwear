@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFormattedTextField;
 
 /**
  *
@@ -37,6 +38,8 @@ import java.awt.event.KeyEvent;
 public class additem extends javax.swing.JPanel {
 	private JTextField wieght;
 	private JLabel qtymsg;
+	private JFormattedTextField txtdisc;
+	private JTextField txttax;
 
     /**
      * Creates new form customer1
@@ -56,40 +59,40 @@ public class additem extends javax.swing.JPanel {
     	
     	JLabel lblNewLabel_1 = new JLabel("Product Code");
     	lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1.setBounds(49, 124, 110, 26);
+    	lblNewLabel_1.setBounds(60, 87, 110, 26);
     	add(lblNewLabel_1);
     	
     	JLabel lblNewLabel_1_1 = new JLabel("Product Name");
     	lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1_1.setBounds(49, 181, 110, 26);
+    	lblNewLabel_1_1.setBounds(60, 127, 110, 26);
     	add(lblNewLabel_1_1);
     	
     	JLabel lblNewLabel_1_2 = new JLabel("Weight");
     	lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1_2.setBounds(49, 244, 110, 26);
+    	lblNewLabel_1_2.setBounds(60, 164, 110, 26);
     	add(lblNewLabel_1_2);
     	
     	JLabel lblNewLabel_1_3 = new JLabel("Quantity");
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1_3.setBounds(49, 296, 110, 26);
+    	lblNewLabel_1_3.setBounds(60, 207, 110, 26);
     	add(lblNewLabel_1_3);
     	
     	JLabel lblNewLabel_1_4 = new JLabel("Wholesale Price");
     	lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1_4.setBounds(49, 353, 140, 26);
+    	lblNewLabel_1_4.setBounds(60, 250, 140, 26);
     	add(lblNewLabel_1_4);
     	
     	JLabel lblNewLabel_1_4_1 = new JLabel("Rettail Price");
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	lblNewLabel_1_4_1.setBounds(49, 404, 140, 26);
+    	lblNewLabel_1_4_1.setBounds(60, 287, 140, 26);
     	add(lblNewLabel_1_4_1);
     	
     	JTextField pcode = new JTextField();
-    	pcode.setBounds(251, 124, 224, 26);
+    	pcode.setBounds(250, 90, 225, 25);
     	add(pcode);
     	
     	JTextField pname = new JTextField();
-    	pname.setBounds(251, 191, 224, 26);
+    	pname.setBounds(250, 130, 225, 25);
     	add(pname);
     	
     	wieght = new JTextField();
@@ -108,7 +111,7 @@ public class additem extends javax.swing.JPanel {
     		
     		}
     	});
-    	wieght.setBounds(251, 241, 224, 29);
+    	wieght.setBounds(250, 170, 225, 25);
     	add(wieght);
     	
     	JTextField qty = new JTextField();
@@ -127,7 +130,7 @@ public class additem extends javax.swing.JPanel {
     		}
     	});
     	
-    	qty.setBounds(251, 293, 224, 29);
+    	qty.setBounds(250, 210,  225, 25);
     	add(qty);
     	
     	JTextField rprice = new JTextField();
@@ -146,7 +149,7 @@ public class additem extends javax.swing.JPanel {
     		
     		}
     	});
-    	rprice.setBounds(251, 401, 224, 29);
+    	rprice.setBounds(250, 290,  225, 25);
     	add(rprice);
     	
     	JTextField wprice = new JTextField();
@@ -163,7 +166,7 @@ public class additem extends javax.swing.JPanel {
     		
     		}
     	});
-    	wprice.setBounds(251, 350, 224, 29);
+    	wprice.setBounds(251, 250, 225, 25);
     	add(wprice);
     	
     	JButton btnNewButton = new JButton("ADD");
@@ -183,10 +186,14 @@ public class additem extends javax.swing.JPanel {
         			float floatrpri=Float.parseFloat(rpri);
         			String wiegh=wieght.getText();
         			float floatwiegh=Float.parseFloat(wiegh);
+        			String disco=txtdisc.getText();
+        			float floatdisc=Float.parseFloat(disco);
+        			String taxe=txttax.getText();
+        			float floattax=Float.parseFloat(taxe);
         			 try {
         		            
         		            Statement s = db.mycon().createStatement();
-        		            s.executeUpdate(" INSERT INTO sampledb.product(productcode,name,qty,wieght,rprice,wprice) VALUES ('"+code+"','"+name+"','"+floatqty+"','"+floatwiegh+"','"+floatrpri+"','"+floatwpri+"')");
+        		            s.executeUpdate(" INSERT INTO sampledb.product(productcode,name,qty,wieght,rprice,wprice,disc,tax) VALUES ('"+code+"','"+name+"','"+floatqty+"','"+floatwiegh+"','"+floatrpri+"','"+floatwpri+"','"+floatdisc+"','"+floattax+"')");
         		             JOptionPane.showMessageDialog(null, "Added Item");
         		            
         		            
@@ -219,22 +226,18 @@ public class additem extends javax.swing.JPanel {
     			float floatrpri=Float.parseFloat(rpri);
     			String wiegh=wieght.getText();
     			float floatwiegh=Float.parseFloat(wiegh);
+    			String disco=txtdisc.getText();
+    			float floatdisc=Float.parseFloat(disco);
+    			String taxe=txttax.getText();
+    			float floattax=Float.parseFloat(taxe);
     			 try {
     		            
     		            Statement s = db.mycon().createStatement();
-    		            s.executeUpdate(" INSERT INTO sampledb.product(productcode,name,qty,wieght,rprice,wprice) VALUES ('"+code+"','"+name+"','"+floatqty+"','"+floatwiegh+"','"+floatrpri+"','"+floatwpri+"')");
-    		            Linear barcode = new Linear();
-    					barcode.setType(Linear.CODE128B);
-    					barcode.setData(pcode.getText());
-    					barcode.setI(11.0f);
-    					String fname=pcode.getText();
-    					barcode.renderBarcode("D:\\Barcode\\"+fname+".png");
-    					
-    		            JOptionPane.showMessageDialog(null, "Added Item");
-    		             
+    		            s.executeUpdate(" INSERT INTO sampledb.product(productcode,name,qty,wieght,rprice,wprice,disc,tax) VALUES ('"+code+"','"+name+"','"+floatqty+"','"+floatwiegh+"','"+floatrpri+"','"+floatwpri+"','"+floatdisc+"','"+floattax+"')");
+    		             JOptionPane.showMessageDialog(null, "Added Item");
     		            
     		            
-    		        } catch (Exception b) {
+    		        } catch (Exception b) { 
     		            System.out.println(b);
     		            JOptionPane.showMessageDialog(null, b);
     		        }
@@ -249,7 +252,7 @@ public class additem extends javax.swing.JPanel {
 			}
     	});
     	btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	btnNewButton.setBounds(340, 441, 89, 23);
+    	btnNewButton.setBounds(202, 468, 89, 23);
     	add(btnNewButton);
     	
     	JButton btnNewButton_1 = new JButton("RESET");
@@ -278,21 +281,57 @@ public class additem extends javax.swing.JPanel {
     		}
     	});
     	btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-    	btnNewButton_1.setBounds(523, 441, 89, 23);
+    	btnNewButton_1.setBounds(399, 468, 89, 23);
     	add(btnNewButton_1);
     	
     	JLabel qtymsg = new JLabel();
     	qtymsg.setBounds(525, 296, 110, 22);
     	add(qtymsg);
-        
-        
+    	
+    	txtdisc = new JFormattedTextField();
+    	txtdisc.setBounds(250, 330,  225, 25);
+    	add(txtdisc);
+    	txtdisc.setText("0");
+    	
+    	txttax = new JTextField();
+    	
+    	txttax.addKeyListener(new KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+
+           		char c=e.getKeyChar();
+    			if(Character.isLetter(c))
+    			{
+    				
+    				 JOptionPane.showMessageDialog(null, "enter number");
+    				 txttax.setText("");
+    				
+    				
+    			}
+           	
+    		}
+    	});
+    	txttax.setBounds(250, 370, 225, 25);
+    	add(txttax);
+    	txttax.setColumns(10);
+    	txttax.setText("0");
+    	
+    	JLabel disclabel = new JLabel("Discount");
+    	disclabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+    	disclabel.setBounds(60, 333, 140, 14);
+    	add(disclabel);
+    	
+    	JLabel taxlabel = new JLabel("Tax");
+    	taxlabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+    	taxlabel.setBounds(60, 373, 110, 14);
+    	add(taxlabel);
+    	
+    	JLabel lblNewLabel_2 = new JLabel("%");
+    	lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	lblNewLabel_2.setBounds(485, 370, 23, 30);
+    	add(lblNewLabel_2);
+    
         
         
     }
-
-   
-    
-    
-    
-   
 }
