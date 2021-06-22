@@ -90,7 +90,7 @@ public class Editbill extends JPanel {
     	setLayout(null);
     	 
     	JPanel panel = new JPanel();
-    	panel.setBounds(10, 11, 627, 55);
+    	panel.setBounds(87, 11, 627, 55);
     	add(panel);
     	panel.setLayout(null);
     	
@@ -183,6 +183,22 @@ public class Editbill extends JPanel {
     	lblNewLabel_1_4_1.setBounds(512, 124, 60, 26);
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4_1);
+    	JButton clsbtn;
+   	 clsbtn = new JButton("x");
+        clsbtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	 Home  homeobj1=new  Home();
+      	
+          homeobj1.setVisible(true);
+        		
+        		
+        	  
+        	  
+        	}
+        });
+        clsbtn.setFont(new Font("Tahoma", Font.BOLD, 39));
+        clsbtn.setBounds(0, 0, 60, 55);
+        add(clsbtn);
     	
       
     	txtpname= new JTextField();
@@ -507,6 +523,13 @@ public class Editbill extends JPanel {
        add(txtcustomer);
        txtcustomer.setColumns(10);
        
+       txtbalance = new JTextField();
+       txtbalance.setBounds(504, 479, 110, 26);
+       add(txtbalance);
+       txtbalance.setColumns(10);
+       txtbalance.setText("0");
+       
+       
        JLabel lblNewLabel_2 = new JLabel("Customer");
        lblNewLabel_2.setBounds(907, 87, 86, 26);
        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -544,11 +567,7 @@ public class Editbill extends JPanel {
        add(txtpaid);
        txtpaid.setColumns(10);
        
-       txtbalance = new JTextField();
-       txtbalance.setBounds(504, 479, 110, 26);
-       add(txtbalance);
-       txtbalance.setColumns(10);
-       
+      
        JLabel lblNewLabel_3 = new JLabel("Paid");
        lblNewLabel_3.setBounds(419, 447, 49, 22);
        lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -701,7 +720,14 @@ public class Editbill extends JPanel {
            			}
 
            			String tot=String.valueOf(total);
-           			txttotal.setText(tot);	
+           			float x7=Float.parseFloat(tot);
+           			txttotal.setText(tot);
+           			String a6=txtmdisc.getText();
+           			float x1=Float.parseFloat(a6);
+           			float x5=x7-x1;
+           			String x10=String.valueOf(x5);
+           			txtnetamnt.setText(x10);
+           		    txtpaid.setText(txtnetamnt.getText());
 
 
                	  

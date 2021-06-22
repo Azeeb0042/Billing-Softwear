@@ -68,7 +68,7 @@ public class updateitem extends JPanel {
     	setLayout(null);
     	
     	JPanel panel = new JPanel();
-    	panel.setBounds(10, 11, 687, 68);
+    	panel.setBounds(97, 11, 687, 68);
     	add(panel);
     	panel.setLayout(null);
     	
@@ -76,6 +76,22 @@ public class updateitem extends JPanel {
     	lblNewLabel.setBounds(207, 11, 294, 46);
     	lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
     	panel.add(lblNewLabel);
+    	JButton clsbtn;
+   	 clsbtn = new JButton("x");
+        clsbtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	 Home  homeobj1=new  Home();
+      	
+          homeobj1.setVisible(true);
+        		
+        		
+        	  
+        	  
+        	}
+        });
+        clsbtn.setFont(new Font("Tahoma", Font.BOLD, 39));
+        clsbtn.setBounds(0, 0, 60, 55);
+        add(clsbtn);
     	
     	JLabel lblNewLabel_1_1 = new JLabel("Product Name search");
     	lblNewLabel_1_1.setBounds(49, 90, 162, 26);

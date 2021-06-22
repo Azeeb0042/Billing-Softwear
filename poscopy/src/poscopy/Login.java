@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame implements ActionListener {
 	
@@ -53,6 +55,20 @@ public class Login extends JFrame implements ActionListener {
         container.add(passwordField);
         showPassword.setBounds(535, 257, 150, 30);
         container.add(showPassword);
+        loginButton.addKeyListener(new KeyAdapter() {
+        	@Override
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+        			
+        			
+        			
+        			
+        			
+        			
+        		}
+        	}
+        	
+        });
         loginButton.setBounds(500, 350, 115, 36);
         container.add(loginButton);
         
@@ -69,14 +85,14 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e)
     {      
-        //Coding Part of LOGIN button
+        
         if (e.getSource() == loginButton) {
             String userText;
             String pwdText;
             userText = userTextField.getText();
             pwdText = passwordField.getText();
-            if (userText.equalsIgnoreCase("Azeeb") && pwdText.equalsIgnoreCase("0042")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
+            if (userText.equalsIgnoreCase("") && pwdText.equalsIgnoreCase("")) {
+                //JOptionPane.showMessageDialog(this, "Login Successful");
                
                 Home  homeobj=new  Home();
                 	
@@ -89,19 +105,6 @@ public class Login extends JFrame implements ActionListener {
                
             }
     }
-         
-              
-        		  
-            
-           
-              
-                	
-                
-                	
-
-
-        
-       //Coding Part of showPassword JCheckBox
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
