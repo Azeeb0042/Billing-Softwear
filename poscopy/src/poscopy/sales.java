@@ -26,22 +26,6 @@ public class sales extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblNewLabel.setBounds(63, 11, 127, 31);
 		panel.add(lblNewLabel);
-		JButton clsbtn;
-   	 clsbtn = new JButton("x");
-        clsbtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	 Home  homeobj1=new  Home();
-      	
-          homeobj1.setVisible(true);
-        		
-        		
-        	  
-        	  
-        	}
-        });
-        clsbtn.setFont(new Font("Tahoma", Font.BOLD, 39));
-        clsbtn.setBounds(0, 0, 60, 55);
-        add(clsbtn);
 
 	}
 }

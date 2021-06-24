@@ -12,6 +12,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JProgressBar;
 
 
 
@@ -43,7 +46,9 @@ public class Home extends javax.swing.JFrame {
 
         home_bnt_grp = new javax.swing.ButtonGroup();
         panel_load = new javax.swing.JPanel();
+        panel_load.setBackground(new Color(255, 255, 153));
         jPanel3 = new javax.swing.JPanel();
+        jPanel3.setBackground(new Color(0, 51, 102));
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +56,7 @@ public class Home extends javax.swing.JFrame {
         panel_load.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         
         JToggleButton jToggleButton7_1 = new JToggleButton();
+        jToggleButton7_1.setBackground(new Color(0, 51, 51));
         jToggleButton7_1.setText("Reports");
         jToggleButton7_1.setFont(new Font("Tahoma", Font.BOLD, 14));
         
@@ -133,15 +139,17 @@ public class Home extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3Layout.setHorizontalGroup(
         	jPanel3Layout.createParallelGroup(Alignment.LEADING)
-        		.addGap(0, 1366, Short.MAX_VALUE)
+        		.addGap(0, 1342, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
         	jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGap(0, 95, Short.MAX_VALUE)
+        		.addGap(0, 59, Short.MAX_VALUE)
         );
         jPanel3.setLayout(jPanel3Layout);
         
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(0, 51, 102));
+        panel.setForeground(new Color(0, 51, 102));
         panel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new LineBorder(new Color(0, 0, 0))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,6 +177,8 @@ public class Home extends javax.swing.JFrame {
         );
         panel.setLayout(null);
         jToggleButton7 = new javax.swing.JToggleButton();
+        jToggleButton7.setForeground(new Color(255, 255, 255));
+        jToggleButton7.setBackground(new Color(0, 51, 51));
         jToggleButton7.setBounds(10, 11, 130, 50);
         panel.add(jToggleButton7);
         
@@ -177,6 +187,8 @@ public class Home extends javax.swing.JFrame {
                 //jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/reports.png"))); // NOI18N
                 jToggleButton7.setText("Reports");
                 jToggleButton1 = new javax.swing.JToggleButton();
+                jToggleButton1.setForeground(new Color(255, 255, 255));
+                jToggleButton1.setBackground(new Color(0, 51, 51));
                 jToggleButton1.setBounds(10, 67, 130, 51);
                 panel.add(jToggleButton1);
                 
@@ -185,6 +197,8 @@ public class Home extends javax.swing.JFrame {
                         //jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/customer.png"))); // NOI18N
                         jToggleButton1.setText("Add Item");
                         jToggleButton3 = new javax.swing.JToggleButton();
+                        jToggleButton3.setForeground(new Color(255, 255, 255));
+                        jToggleButton3.setBackground(new Color(0, 51, 51));
                         jToggleButton3.setBounds(10, 124, 130, 49);
                         panel.add(jToggleButton3);
                         
@@ -193,6 +207,8 @@ public class Home extends javax.swing.JFrame {
                                 //jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/product.png"))); // NOI18N
                                 jToggleButton3.setText("Billing");
                                 jToggleButton2 = new javax.swing.JToggleButton();
+                                jToggleButton2.setForeground(new Color(255, 255, 255));
+                                jToggleButton2.setBackground(new Color(0, 51, 51));
                                 jToggleButton2.setBounds(10, 179, 130, 51);
                                 panel.add(jToggleButton2);
                                 
@@ -201,6 +217,8 @@ public class Home extends javax.swing.JFrame {
                                         //jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/supplier.png"))); // NOI18N
                                         jToggleButton2.setText("Update Item");
                                         jToggleButton6 = new javax.swing.JToggleButton();
+                                        jToggleButton6.setForeground(new Color(255, 255, 255));
+                                        jToggleButton6.setBackground(new Color(0, 51, 51));
                                         jToggleButton6.setBounds(10, 236, 130, 50);
                                         panel.add(jToggleButton6);
                                         
@@ -209,6 +227,8 @@ public class Home extends javax.swing.JFrame {
                                                 //jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/invo.png"))); // NOI18N
                                                 jToggleButton6.setText("Invoice");
                                                 jToggleButton4 = new javax.swing.JToggleButton();
+                                                jToggleButton4.setForeground(new Color(255, 255, 255));
+                                                jToggleButton4.setBackground(new Color(0, 51, 51));
                                                 jToggleButton4.setBounds(10, 292, 130, 42);
                                                 panel.add(jToggleButton4);
                                                 
@@ -217,6 +237,8 @@ public class Home extends javax.swing.JFrame {
                                                         //jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/emp.png"))); // NOI18N
                                                         jToggleButton4.setText("Stock");
                                                         jToggleButton5 = new javax.swing.JToggleButton();
+                                                        jToggleButton5.setForeground(new Color(255, 255, 255));
+                                                        jToggleButton5.setBackground(new Color(0, 51, 51));
                                                         jToggleButton5.setBounds(10, 340, 130, 50);
                                                         panel.add(jToggleButton5);
                                                         
@@ -224,6 +246,21 @@ public class Home extends javax.swing.JFrame {
                                                                 jToggleButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                                                                 //jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/sales_menu.png"))); // NOI18N
                                                                 jToggleButton5.setText("Edit Bill");
+                                                                
+                                                                JToggleButton tglbtnPurchaseReport = new JToggleButton();
+                                                                tglbtnPurchaseReport.addActionListener(new ActionListener() {
+                                                                	public void actionPerformed(ActionEvent e) {
+                                                                		Purchasereport obj = new Purchasereport();
+                                                                        jpload.jPanelLoader(panel_load, obj);
+                                                                      
+                                                                	}
+                                                                });
+                                                                tglbtnPurchaseReport.setForeground(new Color(255, 255, 255));
+                                                                tglbtnPurchaseReport.setText("Purchase Rep");
+                                                                tglbtnPurchaseReport.setFont(new Font("Tahoma", Font.BOLD, 14));
+                                                                tglbtnPurchaseReport.setBackground(new Color(0, 51, 51));
+                                                                tglbtnPurchaseReport.setBounds(10, 396, 130, 50);
+                                                                panel.add(tglbtnPurchaseReport);
                                                                 jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
                                                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                                                                         jToggleButton5ActionPerformed(evt);
@@ -321,8 +358,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton6ActionPerformed
 
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
-       
-    	
+         Billupdate billupd=new Billupdate();
+    	 jpload.jPanelLoader(panel_load, billupd);
         
     }//GEN-LAST:event_jToggleButton7ActionPerformed
 

@@ -26,6 +26,7 @@ public class Login extends JFrame implements ActionListener {
 
 
     Login() {
+    	getContentPane().setBackground(new Color(255, 255, 153));
     	this.setExtendedState(Login.MAXIMIZED_BOTH);
     	setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\AZEEB\\Downloads\\depositphotos_62960791-stock-illustration-machine-billing-icon-on-screen.jpg"));
         setLayoutManager();
@@ -55,6 +56,8 @@ public class Login extends JFrame implements ActionListener {
         container.add(passwordField);
         showPassword.setBounds(535, 257, 150, 30);
         container.add(showPassword);
+        loginButton.setForeground(new Color(255, 255, 255));
+        loginButton.setBackground(new Color(0, 51, 51));
         loginButton.addKeyListener(new KeyAdapter() {
         	@Override
         	public void keyPressed(KeyEvent e) {

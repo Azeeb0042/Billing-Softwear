@@ -48,8 +48,10 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.CompoundBorder;
+import javax.swing.JInternalFrame;
+import javax.swing.JTabbedPane;
 
-public class Billinsec extends JPanel {
+public class Billupdate extends JPanel {
 	
 	
 	
@@ -79,31 +81,84 @@ public class Billinsec extends JPanel {
 	private JTextField txtmdisc;
 	private JTextField textField_1;
 	private JTextField netamnt;
+	JTextField txtbillid2;
 	JpanelLoader jpload = new JpanelLoader();
-	private JList list2;
 	
 	
-	public int getbillno()
-	{
-		int bill=0;
-		try{
-			Statement s = db.mycon().createStatement();
-			ResultSet v= s.executeQuery("select max(billid) as billid from sampledb.sales");
-			v.next();
-			bill=v.getInt("billid");
-			
-		}
-		catch(SQLException a) {
-				a.printStackTrace();
-		}
-		bill=bill+1;
-		return bill;
-		}
-	public Billinsec() {
+	
+	public Billupdate() {
+		txtbillid2 = new JTextField();
+    	txtbillid2.addKeyListener(new KeyAdapter() {
+    		@Override
+    		public void keyReleased(KeyEvent e) {
+    			char c=e.getKeyChar();
+    			if(Character.isLetter(c))
+    			{ JOptionPane.showMessageDialog(null, "enter number");
+    			txtbillid2.setText("");
+    				
+    			}}
+    	});
+    	txtbillid2.setBounds(10, 11, 86, 26);
+    	add(txtbillid2);
+    	
+    	JButton search_bill = new JButton("Search Bill");
+    	search_bill.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			if(!txtbillid2.getText().equals("")) {
+    			try {
+    				String l=txtbillid2.getText();
+           			float v=Float.parseFloat(l);
+    					Statement s = db.mycon().createStatement();
+    					ResultSet r = s.executeQuery("select * from sampledb.sales where billid='"+v+"'");
+    					DefaultTableModel model=(DefaultTableModel)table.getModel();
+    					
+    		           while(r.next()) {
+
+    		        	   String BillId=r.getString("billid");
+    		        	   String Itemno=r.getString("slno");
+    		        	   String Productname=r.getString("item");
+    		        	   String rprice=r.getString("price");
+    		        	   String Discount=r.getString("disc");
+    		        	   String Tax=r.getString("tax");
+    		        	   String Netrate=r.getString("netrate");
+    		        	   String Qty=r.getString("qty");
+    		        	   String Amount=r.getString("amount");
+
+    		        	   	String Object[]= {BillId,Itemno,Productname,rprice,Discount,Tax,Netrate,Qty,Amount};
+    		        	   	
+    		        	   	model.addRow(Object);}
+    		           
+    		           
+    		           txtbillid.setText(txtbillid2.getText());
+    		           		txtbillid2.setText("");
+    		           		ResultSet r5 = s.executeQuery("select * from sampledb.biller where billid='"+v+"'");
+    		           		while(r5.next()) {
+    		           		txtpaid.setText(r5.getString("paid"));
+    		           		netamnt.setText(r5.getString("netrate"));
+    		           		txtmdisc.setText(r5.getString("disc"));
+    		           		txttotal.setText(r5.getString("total"));
+    		           		txtbalance.setText(r5.getString("balance"));
+    		           		txtcustomer.setText(r5.getString("customer"));
+    		           		}
+    				}
+    				catch(SQLException l) {
+    					l.printStackTrace();
+    					
+    				}	
+    			}else {
+    					JOptionPane.showMessageDialog(null, "enter a number");
+    					
+    				}
+    		}
+    	});
+    	search_bill.setBounds(106, 13, 89, 23);
+        add(search_bill);
+		
+		
 		setBackground(new Color(255, 255, 153));
-		setForeground(new Color(0, 153, 0));
+		setForeground(new Color(255, 255, 255));
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		String bills=String.valueOf(getbillno());	
+			
 				
     	setLayout(null);
     	
@@ -121,108 +176,8 @@ public class Billinsec extends JPanel {
     	lblNewLabel_1_4_1.setBounds(23, 212, 60, 26);
     	lblNewLabel_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 15));
     	add(lblNewLabel_1_4_1);
-    	  list2 = new JList();
-    	  list2.addKeyListener(new KeyAdapter() {
-    	  	@Override
-    	  	public void keyPressed(KeyEvent e) {
-    			if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-    				String s=(String) list2.getSelectedValue();
-        			txtcustomer.setText(s);
-        			list2.setVisible(false);
-        			try {
-        				Statement g = db.mycon().createStatement();
-            			String j=txtcustomer.getText();
-            			ResultSet r6 = g.executeQuery("select customer from sampledb.biller where customer like '"+j+"' LIMIT 1");
-            			while (r6.next()) {
-            				Statement g2 = db.mycon().createStatement();
-
-                			ResultSet r11 = g2.executeQuery("select sum(balance) from sampledb.biller where customer like '"+j+"'");
-                			while (r11.next()) {
-
-                				String a12=r11.getString("sum(balance)");
-                				 float a13=Float.parseFloat(a12);
-                				 if(a13!=0) {
-                					 DefaultTableModel model=new DefaultTableModel();
-                         			model=(DefaultTableModel)table.getModel();
-                         			slno=slno+1;
-                         			
-                         			model.addRow(new Object[] {
-                         					
-                         					
-                         					txtbillid.getText(),
-                         					slno,
-                         				"old balance",
-                         				"0",
-                         				"0",
-                         				"0",
-                         				"0",
-                         				"0",
-                         				a12,
-                         				
-                         				
-                         				});
-                         			float total=0;
-        		           			for(int j1=0;j1<table.getRowCount();j1++) {
-        		           				total=total+Float.parseFloat(table.getValueAt(j1, 8).toString());}
-        		           			String tot=String.valueOf(total);
-        		           			txttotal.setText(tot);	
-        		           		    netamnt.setText(tot);
-        		           		    txtpaid.setText(netamnt.getText());
-                					 
-                				 }
-                				
-                				
-                				
-                			
-                			}
-            				
-            			}
-
-            			
-            			
-            			
-            			
-        			}
-        			catch(SQLException l) {
-        				
-        				l.printStackTrace();
-        			}
-        			
-                   
-        			
-    				
-    				
-    			}}
-    	  });
-          list2.addMouseListener(new MouseAdapter() {
-          	@Override
-          	public void mouseClicked(MouseEvent e) {
-          		String s=(String) list2.getSelectedValue();
-    			txtcustomer.setText(s);
-    			list2.setVisible(false);
-          		
-          	}
-          });
-          list2.setBorder(new LineBorder(new Color(0, 0, 0)));
-     	    list2.setVisible(false);
-
-          list2.setModel(new AbstractListModel() {
-     	 	String[] values = new String[] {""};
-     	 	public int getSize() {
-     	 		return values.length;
-     	 	}
-     	 	public Object getElementAt(int index) {
-     	 		return values[index];
-     	 		
-     	 		
-     	 	}
-     	 });
-     	
-          list2.setBounds(922, 153, 160, 87);
-     	 add(list2);
      	 
           model1 = new DefaultListModel();
-          list2.setModel(model1);
     	
       
     	txtpname= new JTextField();
@@ -377,7 +332,6 @@ public class Billinsec extends JPanel {
        add(scrollPane);
        
        table = new JTable();
-       table.setBackground(new Color(204, 255, 255));
        scrollPane.setViewportView(table);
        table.setModel(new DefaultTableModel(
        	new Object[][] {
@@ -436,10 +390,35 @@ public class Billinsec extends JPanel {
        		try {
        			DefaultTableModel model=(DefaultTableModel)table.getModel();
        			String a11,b11,c11,d11,f11,g11,h11,i11,j11;
-       			Statement s = db.mycon().createStatement();
+       			Statement n = db.mycon().createStatement();
+				String l=txtbillid.getText();
+       			float v=Float.parseFloat(l);
+       			try {
+           			Statement s = db.mycon().createStatement();
+    					ResultSet r1 = s.executeQuery("select * from sampledb.sales where billid='"+v+"'");
+
+    					
+    		           while(r1.next()) {
+    		        	   String Productname=r1.getString("item");
+    		        	   String Qty=r1.getString("qty");
+    		        	   float q=Float.parseFloat(Qty);
+    		        	   Statement k = db.mycon().createStatement();
+    		        	  k.executeUpdate("update sampledb.product  SET qty=qty+("+q+") where name like '"+Productname+"' " );
+    		           }
+    		           
+   				}
+   				catch(SQLException f) {
+   	    			
+   	    			f.printStackTrace();
+   	    		}
+       			n.execute("delete from sampledb.sales where billid='"+v+"'");
+       			n.execute("delete from sampledb.biller where billid='"+v+"'");
+       			
+       				
+       			
        			for(int i=0;i<model.getRowCount();i++)
        				
-       			{	
+       			{  	   
        				a11=model.getValueAt(i, 0).toString();
        				b11=model.getValueAt(i, 1).toString();
        				c11=model.getValueAt(i, 2).toString();
@@ -451,44 +430,32 @@ public class Billinsec extends JPanel {
        				j11=model.getValueAt(i, 8).toString();
        				
        				float g1=Float.parseFloat(i11); 
-       				s.executeUpdate("INSERT INTO sampledb.sales (billid,item,amount,slno,qty,datetime,price,disc,tax,netrate)VALUES ('"+a11+"','"+c11+"','"+j11+"','"+b11+"','"+i11+"',(CURRENT_TIMESTAMP),'"+d11+"','"+f11+"','"+g11+"','"+h11+"')");
-       				s.executeUpdate("UPDATE sampledb.product SET qty=qty -("+g1+")WHERE  name like '"+c11+"'");
-       				
-       			    	          
-       	       	
-       				
-       				
+       				n.executeUpdate("INSERT INTO sampledb.sales (billid,item,amount,slno,qty,datetime,price,disc,tax,netrate)VALUES ('"+a11+"','"+c11+"','"+j11+"','"+b11+"','"+i11+"',(CURRENT_TIMESTAMP),'"+d11+"','"+f11+"','"+g11+"','"+h11+"')");
+       				n.executeUpdate("UPDATE sampledb.product SET qty=qty -("+g1+")WHERE  name like '"+c11+"'");
+       			
        			}
-       		  String billid1,custom,tota,bala,disc,paid,net;
-   			  custom=txtcustomer.getText();
-   	       	  billid1=txtbillid.getText();
-   	          tota=txttotal.getText();
-   	          bala=txtbalance.getText();
-   	          disc=txtmdisc.getText();
-   	          paid=txtpaid.getText();
-        	  net=netamnt.getText();
-        	  
-        	  //DefaultTableModel model=new DefaultTableModel();
-     			model=(DefaultTableModel)table.getModel();
-     			String k1="old balance";    				
-     			
-				for(int i=0;i<model.getRowCount();i++) {
-					String a12=model.getValueAt(i, 2).toString();
-					if(k1.equals (a12)) {
-        	  s.executeUpdate("UPDATE sampledb.biller SET balance=0 where customer like '"+custom+"'");
-					}
-				}
-        	  s.executeUpdate("INSERT INTO sampledb.biller (billid,datetime,customer,total,balance,disc,paid,netrate)VALUES ('"+billid1+"',(CURRENT_TIMESTAMP),'"+custom+"','"+tota+"','"+bala+"','"+disc+"','"+paid+"','"+net+"')");
-
-       		  JOptionPane.showMessageDialog(null, "Bill created");
+       			Statement k = db.mycon().createStatement();
+       		 String billid1,custom,tota,bala,disc,paid,net;
+  			  custom=txtcustomer.getText();
+  	       	  billid1=txtbillid.getText();
+  	          tota=txttotal.getText();
+  	          bala=txtbalance.getText();
+  	          disc=txtmdisc.getText();
+  	          paid=txtpaid.getText();
+       	      net=netamnt.getText();
+  	          
+       	  k.executeUpdate("INSERT INTO sampledb.biller (billid,datetime,customer,total,balance,disc,paid,netrate)VALUES ('"+billid1+"',(CURRENT_TIMESTAMP),'"+custom+"','"+tota+"','"+bala+"','"+disc+"','"+paid+"','"+net+"')");
+       			
+       			
+       			JOptionPane.showMessageDialog(null, "Bill created");
        		      //txtbillid.setText("");
-       		  GENBTN.setEnabled(false);
+       			GENBTN.setEnabled(false);
        		 
        		}
        		catch(SQLException f) {
     			
     			f.printStackTrace();
-    		}	}
+    		}}
        });
        GENBTN.setFont(new Font("Tahoma", Font.PLAIN, 18));
        GENBTN.setBounds(214, 591, 147, 34);
@@ -519,13 +486,10 @@ public class Billinsec extends JPanel {
        add(dltbtn);
        
        txtbillid = new JTextField();
-       txtbillid.setForeground(new Color(255, 51, 51));
-       txtbillid.setBackground(new Color(255, 255, 204));
-       txtbillid.setFont(new Font("Tahoma", Font.PLAIN, 15));
        txtbillid.setEditable(false);
        txtbillid.setBounds(145, 173, 147, 26);
        add(txtbillid);
-       txtbillid.setText(bills);
+      
        txtbillid.setColumns(10);
        
        txtdisc = new JTextField();
@@ -554,36 +518,8 @@ public class Billinsec extends JPanel {
        add(lblNewLabel_1);
        
        txtcustomer = new JTextField();
-       txtcustomer.addKeyListener(new KeyAdapter() {
-       	@Override
-       	public void keyReleased(KeyEvent e) {
-
-     	    list2.setVisible(true);
-
-			String m=txtcustomer.getText();
-			try {
-			Statement s = db.mycon().createStatement();
-			ResultSet r = s.executeQuery("select customer from sampledb.customers where customer like '%"+m+"%'order by customer");
-            model1.removeAllElements();
-			int v=0;
-           while(r.next()& v<6) {
-        	   model1.addElement(r.getString("customer"));
-        	   v++;
-           }
-		}
-		catch(SQLException l) {
-			
-			l.printStackTrace();
-		}
-			
-		
-       	}
-       
-       	@Override
-       	public void keyPressed(KeyEvent e) {
-
-			if(e.getKeyCode()==KeyEvent.VK_ENTER) {}	}
-       });
+       txtcustomer.setEditable(false);
+       txtcustomer.addKeyListener(new KeyAdapter() {});
        txtcustomer.setBounds(803, 153, 117, 26);
        add(txtcustomer);
        txtcustomer.setColumns(10);
@@ -701,17 +637,6 @@ public class Billinsec extends JPanel {
        lblNewLabel_5_1.setBounds(477, 512, 154, 26);
        add(lblNewLabel_5_1);
        
-       JButton btnNewButton_2 = new JButton("+");
-       btnNewButton_2.addActionListener(new ActionListener() {
-       	public void actionPerformed(ActionEvent e) {
-       		Customer cst=new Customer();
-       		cst.setVisible(true);
-       	}
-       });
-       btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
-       btnNewButton_2.setBounds(838, 190, 39, 26);
-       add(btnNewButton_2);
-       
        JButton GENBTN_1 = new JButton("Save/Print");
        GENBTN_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
        GENBTN_1.setBounds(384, 591, 147, 34);
@@ -733,7 +658,7 @@ public class Billinsec extends JPanel {
        lblNewLabel_6_1.setBounds(23, 173, 112, 26);
        add(lblNewLabel_6_1);
        
-       JLabel lblNewLabel = new JLabel("INIT BILL");
+       JLabel lblNewLabel = new JLabel("EDIT BILL");
        lblNewLabel.setBounds(337, 11, 160, 35);
        add(lblNewLabel);
        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));}
@@ -930,4 +855,5 @@ public class Billinsec extends JPanel {
         		}}
    	else {
    			JOptionPane.showMessageDialog(null, "Please Enter all Values");
-   		} }}
+   		} }	
+}
