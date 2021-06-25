@@ -41,6 +41,8 @@ import javax.swing.AbstractListModel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public class updateitem extends JPanel {
 	
@@ -73,16 +75,6 @@ public class updateitem extends JPanel {
 		setBackground(new Color(255, 255, 153));
 		
     	setLayout(null);
-    	
-    	JPanel panel = new JPanel();
-    	panel.setBounds(418, 11, 293, 67);
-    	add(panel);
-    	panel.setLayout(null);
-    	
-    	JLabel lblNewLabel = new JLabel("UPDATE PRODUCT");
-    	lblNewLabel.setBounds(10, 11, 273, 45);
-    	lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
-    	panel.add(lblNewLabel);
     	
         
     	
@@ -610,6 +602,13 @@ public class updateitem extends JPanel {
    	  btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 22));
    	  btnNewButton_4.setBounds(1070, 62, 55, 39);
    	  add(btnNewButton_4);
+   	  
+   	  JLabel lblNewLabel = new JLabel("ITEM MANAGEMENT");
+   	  lblNewLabel.setBounds(418, 17, 308, 45);
+   	  add(lblNewLabel);
+   	  lblNewLabel.setForeground(new Color(0, 51, 51));
+   	  lblNewLabel.setBackground(new Color(0, 51, 102));
+   	  lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
    
     	}
 	

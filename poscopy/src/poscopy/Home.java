@@ -12,9 +12,28 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JProgressBar;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JSeparator;
+import java.awt.Button;
+import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.border.MatteBorder;
+import java.awt.ComponentOrientation;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import javax.swing.DebugGraphics;
+import java.awt.Frame;
+
 
 
 
@@ -30,8 +49,63 @@ public class Home extends javax.swing.JFrame {
     
     
     public Home() {
+    	setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    	setBackground(new Color(102, 102, 51));
+    	setTitle("BILLING POS");
         initComponents();
         this.setExtendedState(Home.MAXIMIZED_BOTH);
+        
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
+        menuBar.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        menuBar.setBackground(new Color(176, 224, 230));
+        setJMenuBar(menuBar);
+        
+        JMenuItem mntmNewMenuItem_1 = new JMenuItem("INIT BILL");
+        mntmNewMenuItem_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Billinsec bill = new Billinsec();
+                jpload.jPanelLoader(panel_load, bill);
+        		
+        	}
+        });
+        mntmNewMenuItem_1.setPreferredSize(new Dimension(100, 26));
+        mntmNewMenuItem_1.setBackground(new Color(0, 0, 51));
+        menuBar.add(mntmNewMenuItem_1);
+        
+        JMenuItem mntmNewMenuItem_4 = new JMenuItem("MONTHLY");
+        mntmNewMenuItem_4.setPreferredSize(new Dimension(100, 26));
+        menuBar.add(mntmNewMenuItem_4);
+        
+        JMenuItem mntmNewMenuItem_3 = new JMenuItem("DAILY");
+        mntmNewMenuItem_3.setPreferredSize(new Dimension(100, 26));
+        menuBar.add(mntmNewMenuItem_3);
+        
+        JMenuItem mntmNewMenuItem_7 = new JMenuItem("ADD PRODUCT");
+        mntmNewMenuItem_7.setPreferredSize(new Dimension(100, 26));
+        mntmNewMenuItem_7.setHorizontalAlignment(SwingConstants.LEFT);
+        mntmNewMenuItem_7.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UNDEFINED, 0));
+        mntmNewMenuItem_7.setForeground(new Color(0, 0, 0));
+        mntmNewMenuItem_7.setBackground(new Color(0, 0, 51));
+        mntmNewMenuItem_7.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		addproduct addobj=new addproduct();
+       	  		addobj.setVisible(true);
+        	}
+        });
+        menuBar.add(mntmNewMenuItem_7);
+        
+        JMenuItem mntmNewMenuItem_6 = new JMenuItem("UPDATE DETAILS");
+        mntmNewMenuItem_6.setPreferredSize(new Dimension(100, 26));
+        menuBar.add(mntmNewMenuItem_6);
+        
+        JMenuItem mntmNewMenuItem_5 = new JMenuItem("ESTIMATE");
+        mntmNewMenuItem_5.setPreferredSize(new Dimension(100, 26));
+        menuBar.add(mntmNewMenuItem_5);
+        
+        JMenuItem mntmNewMenuItem_2 = new JMenuItem("EDIT BILL");
+        mntmNewMenuItem_2.setPreferredSize(new Dimension(100, 26));
+        menuBar.add(mntmNewMenuItem_2);
         
         
         
@@ -109,20 +183,20 @@ public class Home extends javax.swing.JFrame {
         				.addComponent(jToggleButton4_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(jToggleButton2_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
         				.addComponent(jToggleButton6_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        			.addContainerGap(296, Short.MAX_VALUE))
+        			.addContainerGap(284, Short.MAX_VALUE))
         );
         panel_loadLayout.setVerticalGroup(
         	panel_loadLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(panel_loadLayout.createSequentialGroup()
-        			.addGap(38)
+        			.addGap(75)
         			.addGroup(panel_loadLayout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(jToggleButton7_1, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
         				.addComponent(jToggleButton3_1, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jToggleButton2_1, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jToggleButton2_1, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(jToggleButton7_1, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE))
         			.addGap(30)
         			.addGroup(panel_loadLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(panel_loadLayout.createSequentialGroup()
-        					.addComponent(jToggleButton6_1, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+        					.addComponent(jToggleButton6_1, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
         					.addGap(29))
         				.addGroup(panel_loadLayout.createSequentialGroup()
         					.addComponent(jToggleButton1_1, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
@@ -130,7 +204,7 @@ public class Home extends javax.swing.JFrame {
         			.addGroup(panel_loadLayout.createParallelGroup(Alignment.LEADING, false)
         				.addComponent(jToggleButton4_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         				.addComponent(jToggleButton5_1, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-        			.addContainerGap(85, Short.MAX_VALUE))
+        			.addContainerGap(109, Short.MAX_VALUE))
         );
         panel_load.setLayout(panel_loadLayout);
 
@@ -142,8 +216,8 @@ public class Home extends javax.swing.JFrame {
         		.addGap(0, 1342, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
-        	jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-        		.addGap(0, 59, Short.MAX_VALUE)
+        	jPanel3Layout.createParallelGroup(Alignment.LEADING)
+        		.addGap(0, 61, Short.MAX_VALUE)
         );
         jPanel3.setLayout(jPanel3Layout);
         
@@ -158,140 +232,154 @@ public class Home extends javax.swing.JFrame {
         		.addGroup(layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         				.addComponent(jPanel3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1346, Short.MAX_VALUE)
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        				.addGroup(layout.createSequentialGroup()
         					.addContainerGap()
         					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, 1176, Short.MAX_VALUE)))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)))
         			.addContainerGap())
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
-        				.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+        				.addComponent(panel_load, GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
         			.addContainerGap())
         );
         panel.setLayout(null);
-        jToggleButton7 = new javax.swing.JToggleButton();
-        jToggleButton7.setForeground(new Color(255, 255, 255));
-        jToggleButton7.setBackground(new Color(0, 51, 51));
-        jToggleButton7.setBounds(10, 11, 130, 50);
-        panel.add(jToggleButton7);
+        HOME1 = new javax.swing.JToggleButton();
+        HOME1.setForeground(new Color(255, 255, 255));
+        HOME1.setBackground(new Color(0, 51, 51));
+        HOME1.setBounds(10, 6, 130, 50);
+        panel.add(HOME1);
         
-                home_bnt_grp.add(jToggleButton7);
-                jToggleButton7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                home_bnt_grp.add(HOME1);
+                HOME1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                 //jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/reports.png"))); // NOI18N
-                jToggleButton7.setText("Reports");
-                jToggleButton1 = new javax.swing.JToggleButton();
-                jToggleButton1.setForeground(new Color(255, 255, 255));
-                jToggleButton1.setBackground(new Color(0, 51, 51));
-                jToggleButton1.setBounds(10, 67, 130, 51);
-                panel.add(jToggleButton1);
-                
-                        home_bnt_grp.add(jToggleButton1);
-                        jToggleButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                        //jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/customer.png"))); // NOI18N
-                        jToggleButton1.setText("Add Item");
-                        jToggleButton3 = new javax.swing.JToggleButton();
-                        jToggleButton3.setForeground(new Color(255, 255, 255));
-                        jToggleButton3.setBackground(new Color(0, 51, 51));
-                        jToggleButton3.setBounds(10, 124, 130, 49);
-                        panel.add(jToggleButton3);
+                HOME1.setText("Edit Bill");
+                        HOME2 = new javax.swing.JToggleButton();
+                        HOME2.setForeground(new Color(255, 255, 255));
+                        HOME2.setBackground(new Color(0, 51, 51));
+                        HOME2.setBounds(10, 67, 130, 49);
+                        panel.add(HOME2);
                         
-                                home_bnt_grp.add(jToggleButton3);
-                                jToggleButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                home_bnt_grp.add(HOME2);
+                                HOME2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                                 //jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/product.png"))); // NOI18N
-                                jToggleButton3.setText("Billing");
-                                jToggleButton2 = new javax.swing.JToggleButton();
-                                jToggleButton2.setForeground(new Color(255, 255, 255));
-                                jToggleButton2.setBackground(new Color(0, 51, 51));
-                                jToggleButton2.setBounds(10, 179, 130, 51);
-                                panel.add(jToggleButton2);
+                                HOME2.setText("Billing");
+                                HOME3 = new javax.swing.JToggleButton();
+                                HOME3.setForeground(new Color(255, 255, 255));
+                                HOME3.setBackground(new Color(0, 51, 51));
+                                HOME3.setBounds(10, 127, 130, 51);
+                                panel.add(HOME3);
                                 
-                                        home_bnt_grp.add(jToggleButton2);
-                                        jToggleButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                        home_bnt_grp.add(HOME3);
+                                        HOME3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                                         //jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/supplier.png"))); // NOI18N
-                                        jToggleButton2.setText("Update Item");
-                                        jToggleButton6 = new javax.swing.JToggleButton();
-                                        jToggleButton6.setForeground(new Color(255, 255, 255));
-                                        jToggleButton6.setBackground(new Color(0, 51, 51));
-                                        jToggleButton6.setBounds(10, 236, 130, 50);
-                                        panel.add(jToggleButton6);
+                                        HOME3.setText("Item\r\n");
+                                        HOME7 = new javax.swing.JToggleButton();
+                                        HOME7.setForeground(new Color(255, 255, 255));
+                                        HOME7.setBackground(new Color(0, 51, 51));
+                                        HOME7.setBounds(10, 364, 130, 50);
+                                        panel.add(HOME7);
                                         
-                                                home_bnt_grp.add(jToggleButton6);
-                                                jToggleButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                                home_bnt_grp.add(HOME7);
+                                                HOME7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                                                 //jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/invo.png"))); // NOI18N
-                                                jToggleButton6.setText("Invoice");
-                                                jToggleButton4 = new javax.swing.JToggleButton();
-                                                jToggleButton4.setForeground(new Color(255, 255, 255));
-                                                jToggleButton4.setBackground(new Color(0, 51, 51));
-                                                jToggleButton4.setBounds(10, 292, 130, 42);
-                                                panel.add(jToggleButton4);
+                                                HOME7.setText("Month");
+                                                HOME4 = new javax.swing.JToggleButton();
+                                                HOME4.setForeground(new Color(255, 255, 255));
+                                                HOME4.setBackground(new Color(0, 51, 51));
+                                                HOME4.setBounds(10, 189, 130, 42);
+                                                panel.add(HOME4);
                                                 
-                                                        home_bnt_grp.add(jToggleButton4);
-                                                        jToggleButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                                        home_bnt_grp.add(HOME4);
+                                                        HOME4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
                                                         //jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/emp.png"))); // NOI18N
-                                                        jToggleButton4.setText("Stock");
-                                                        jToggleButton5 = new javax.swing.JToggleButton();
-                                                        jToggleButton5.setForeground(new Color(255, 255, 255));
-                                                        jToggleButton5.setBackground(new Color(0, 51, 51));
-                                                        jToggleButton5.setBounds(10, 340, 130, 50);
-                                                        panel.add(jToggleButton5);
-                                                        
-                                                                home_bnt_grp.add(jToggleButton5);
-                                                                jToggleButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-                                                                //jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/sales_menu.png"))); // NOI18N
-                                                                jToggleButton5.setText("Edit Bill");
+                                                        HOME4.setText("Stock");
                                                                 
-                                                                JToggleButton tglbtnPurchaseReport = new JToggleButton();
-                                                                tglbtnPurchaseReport.addActionListener(new ActionListener() {
+                                                                JToggleButton HOME5 = new JToggleButton();
+                                                                HOME5.addActionListener(new ActionListener() {
                                                                 	public void actionPerformed(ActionEvent e) {
                                                                 		Purchasereport obj = new Purchasereport();
                                                                         jpload.jPanelLoader(panel_load, obj);
                                                                       
                                                                 	}
                                                                 });
-                                                                tglbtnPurchaseReport.setForeground(new Color(255, 255, 255));
-                                                                tglbtnPurchaseReport.setText("Purchase Rep");
-                                                                tglbtnPurchaseReport.setFont(new Font("Tahoma", Font.BOLD, 14));
-                                                                tglbtnPurchaseReport.setBackground(new Color(0, 51, 51));
-                                                                tglbtnPurchaseReport.setBounds(10, 396, 130, 50);
-                                                                panel.add(tglbtnPurchaseReport);
-                                                                jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
-                                                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                                                        jToggleButton5ActionPerformed(evt);
-                                                                    }
-                                                                });
-                                                        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+                                                                HOME5.setForeground(new Color(255, 255, 255));
+                                                                HOME5.setText("Purchase Rep");
+                                                                HOME5.setFont(new Font("Tahoma", Font.BOLD, 14));
+                                                                HOME5.setBackground(new Color(0, 51, 51));
+                                                                HOME5.setBounds(10, 242, 130, 50);
+                                                                panel.add(HOME5);
+                                                                HOME8 = new javax.swing.JToggleButton();
+                                                                HOME8.setBounds(10, 425, 130, 51);
+                                                                panel.add(HOME8);
+                                                                HOME8.setForeground(new Color(255, 255, 255));
+                                                                HOME8.setBackground(new Color(0, 51, 51));
+                                                                
+                                                                        home_bnt_grp.add(HOME8);
+                                                                        HOME8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                                                        //jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/customer.png"))); // NOI18N
+                                                                        HOME8.setText("Customers");
+                                                                        
+                                                                        JToggleButton tglbtnEstimate = new JToggleButton();
+                                                                        tglbtnEstimate.addActionListener(new ActionListener() {
+                                                                        	public void actionPerformed(ActionEvent e) {
+                                                                        		Estimate estmt = new Estimate();
+                                                                                jpload.jPanelLoader(panel_load, estmt);
+                                                                        	}
+                                                                        });
+                                                                        tglbtnEstimate.setText("Estimate");
+                                                                        tglbtnEstimate.setForeground(Color.WHITE);
+                                                                        tglbtnEstimate.setFont(new Font("Tahoma", Font.BOLD, 14));
+                                                                        tglbtnEstimate.setBackground(new Color(0, 51, 51));
+                                                                        tglbtnEstimate.setBounds(10, 487, 130, 51);
+                                                                        panel.add(tglbtnEstimate);
+                                                                        HOME6 = new javax.swing.JToggleButton();
+                                                                        HOME6.setBounds(10, 303, 130, 50);
+                                                                        panel.add(HOME6);
+                                                                        HOME6.setForeground(new Color(255, 255, 255));
+                                                                        HOME6.setBackground(new Color(0, 51, 51));
+                                                                        
+                                                                                home_bnt_grp.add(HOME6);
+                                                                                HOME6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+                                                                                //jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/pro/img/sales_menu.png"))); // NOI18N
+                                                                                HOME6.setText("Day");
+                                                                                HOME6.addActionListener(new java.awt.event.ActionListener() {
+                                                                                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                                                        jToggleButton5ActionPerformed(evt);
+                                                                                    }
+                                                                                });
+                                                                        HOME8.addActionListener(new java.awt.event.ActionListener() {
+                                                                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                                                                jToggleButton1ActionPerformed(evt);
+                                                                            }
+                                                                        });
+                                                        HOME4.addActionListener(new java.awt.event.ActionListener() {
                                                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                                                 jToggleButton4ActionPerformed(evt);
                                                             }
                                                         });
-                                                jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+                                                HOME7.addActionListener(new java.awt.event.ActionListener() {
                                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                                                         jToggleButton6ActionPerformed(evt);
                                                     }
                                                 });
-                                        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+                                        HOME3.addActionListener(new java.awt.event.ActionListener() {
                                             public void actionPerformed(java.awt.event.ActionEvent evt) {
                                                 jToggleButton2ActionPerformed(evt);
                                             }
                                         });
-                                jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+                                HOME2.addActionListener(new java.awt.event.ActionListener() {
                                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                                         jToggleButton3ActionPerformed(evt);
                                     }
                                 });
-                        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-                            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jToggleButton1ActionPerformed(evt);
-                            }
-                        });
-                jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
+                HOME1.addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
                         jToggleButton7ActionPerformed(evt);
                     }
@@ -304,7 +392,7 @@ public class Home extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // customer load
         
-    	additem add = new additem();
+    	Customerrep add = new Customerrep();
        jpload.jPanelLoader(panel_load, add);
        
         
@@ -340,7 +428,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-    	Editbill kl = new Editbill();
+    	Dailyreport kl = new Dailyreport();
         jpload.jPanelLoader(panel_load, kl); 
       
         
@@ -350,7 +438,7 @@ public class Home extends javax.swing.JFrame {
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
         //Invoice inv = new Invoice();
         //jpload.jPanelLoader(panel_load, inv);
-    	 sales sl = new sales();
+    	 Monthly sl = new Monthly();
          jpload.jPanelLoader(panel_load, sl);
          
         
@@ -401,12 +489,29 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup home_bnt_grp;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
-    private javax.swing.JToggleButton jToggleButton6;
-    private javax.swing.JToggleButton jToggleButton7;
+    private javax.swing.JToggleButton HOME8;
+    private javax.swing.JToggleButton HOME3;
+    private javax.swing.JToggleButton HOME2;
+    private javax.swing.JToggleButton HOME4;
+    private javax.swing.JToggleButton HOME6;
+    private javax.swing.JToggleButton HOME7;
+    private javax.swing.JToggleButton HOME1;
     private javax.swing.JPanel panel_load;
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

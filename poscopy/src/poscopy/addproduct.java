@@ -40,6 +40,12 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import java.awt.Rectangle;
+import java.awt.Frame;
+import java.awt.Dialog.ModalExclusionType;
+import java.awt.Dimension;
 
 /**
  *
@@ -61,6 +67,14 @@ public class addproduct extends javax.swing.JFrame {
      * Creates new form customer1
      */
     public addproduct() {
+    	setName("ADD ITEM");
+    	setForeground(new Color(255, 255, 153));
+    	getContentPane().setBackground(new Color(255, 255, 153));
+    	setBackground(new Color(255, 255, 153));
+    	setType(Type.UTILITY);
+    	setExtendedState(Frame.ICONIFIED);
+    	setBounds(new Rectangle(180, 80, 1000, 600));
+    	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     	getContentPane().setLayout(null);
     	
     	JLabel lblNewLabel_1 = new JLabel("Product Code");
@@ -177,6 +191,8 @@ public class addproduct extends javax.swing.JFrame {
     	getContentPane().add(wprice);
     	
     	JButton btnNewButton = new JButton("ADD");
+    	btnNewButton.setForeground(new Color(255, 255, 255));
+    	btnNewButton.setBackground(new Color(0, 51, 51));
     	btnNewButton.addKeyListener(new KeyAdapter() {
     		@Override
     		public void keyPressed(KeyEvent e) {
@@ -265,6 +281,8 @@ public class addproduct extends javax.swing.JFrame {
     	getContentPane().add(btnNewButton);
     	
     	JButton btnNewButton_1 = new JButton("RESET");
+    	btnNewButton_1.setForeground(new Color(255, 255, 255));
+    	btnNewButton_1.setBackground(new Color(0, 51, 51));
     	btnNewButton_1.addKeyListener(new KeyAdapter() {
     		@Override
     		public void keyPressed(KeyEvent e) {
@@ -289,7 +307,7 @@ public class addproduct extends javax.swing.JFrame {
     			 wprice.setText("");
     		}
     	});
-    	btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+    	btnNewButton_1.setFont(new Font("Microsoft YaHei", Font.BOLD, 15));
     	btnNewButton_1.setBounds(399, 369, 89, 23);
     	getContentPane().add(btnNewButton_1);
     	
@@ -339,17 +357,6 @@ public class addproduct extends javax.swing.JFrame {
     	lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	lblNewLabel_2.setBounds(484, 317, 23, 30);
     	getContentPane().add(lblNewLabel_2);
-    	
-    	JButton btnNewButton_2 = new JButton("+");
-    	btnNewButton_2.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent e) {
-    			Vendors vnd=new Vendors();
-    			vnd.setVisible(true);
-    		}
-    	});
-    	btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-    	btnNewButton_2.setBounds(1076, 91, 49, 34);
-    	getContentPane().add(btnNewButton_2);
     
         
         
